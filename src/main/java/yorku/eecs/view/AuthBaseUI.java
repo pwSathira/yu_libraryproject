@@ -97,7 +97,7 @@ public abstract class AuthBaseUI extends JPanel{
         button.setFocusPainted(false);
         button.setContentAreaFilled(false);
         button.setFocusable(false);
-        ImageIcon darkenedIcon = ImageProcessor.darkenImageIcon(icon, 0.7f);
+        ImageIcon darkenedIcon = ImageProcessor.darkenImageIcon(icon, 0.5f);
 
         //Button Hover Effects
         button.addMouseListener(new MouseAdapter() {

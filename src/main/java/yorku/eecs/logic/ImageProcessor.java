@@ -7,9 +7,17 @@ import javax.swing.ImageIcon;
 
 public class ImageProcessor {
     public static ImageIcon darkenImageIcon(ImageIcon originalIcon, float scaleFactor) {
-        BufferedImage originalImage = toBufferedImage(originalIcon.getImage());
-        RescaleOp op = new RescaleOp(scaleFactor, 0, null);
-        BufferedImage darkenedImage = op.filter(originalImage, null);
+        BufferedImage originalImage = new BufferedImage(
+                originalIcon.getIconWidth(),
+                originalIcon.getIconHeight(),
+                BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = originalImage.createGraphics();
+        originalIcon.paintIcon(null, g, 0, 0);
+        g.dispose();
+        float[] scales = { scaleFactor, scaleFactor, scaleFactor, 1.0f };
+        float[] offsets = new float[4];
+        RescaleOp rescaleOp = new RescaleOp(scales, offsets, null);
+        BufferedImage darkenedImage = rescaleOp.filter(originalImage, null);
         return new ImageIcon(darkenedImage);
     }
     private static BufferedImage toBufferedImage(Image img) {
