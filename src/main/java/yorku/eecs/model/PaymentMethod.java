@@ -1,6 +1,6 @@
 package yorku.eecs.model;
 
-public abstract class Payment {
+public abstract class PaymentMethod {
     private boolean validate;
     private boolean invoiced;
 

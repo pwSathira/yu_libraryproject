@@ -2,7 +2,7 @@ package yorku.eecs.model;
 
 import java.util.Date;
 
-public class Credit extends Payment{
+public class Credit implements PaymentOptions{
     private String cardNumber;
     private String cardHolderName;
     private String cvv;
@@ -17,6 +17,12 @@ public class Credit extends Payment{
         this.expiryDate = expiryDate;
     }
 
+    //getters
+    public String getCardNumber() { return this.cardNumber; }
+    public String getCardHolderName() { return this.cardHolderName; }
+    public String getCvv() { return this.cvv; }
+    public Date getExpiryDate() {return this.expiryDate; }
+
     // setters
     public void setCardNumber(String cardNumber){
         this.cardNumber = cardNumber;
@@ -25,6 +31,9 @@ public class Credit extends Payment{
         this.cardHolderName = cardHolderName;
     }
     public void setCvv(String cvv){
-
+        this.cvv = cvv;
+    }
+    public void setExpiryDate(Date expiryDate){
+        this.expiryDate = expiryDate;
     }
 }

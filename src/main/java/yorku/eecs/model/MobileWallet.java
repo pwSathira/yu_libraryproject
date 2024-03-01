@@ -1,6 +1,6 @@
 package yorku.eecs.model;
 
-public class MobileWallet extends Payment{
+public class MobileWallet extends PaymentMethod{
     private String accountNumber;
     private String accountUsername;
 
