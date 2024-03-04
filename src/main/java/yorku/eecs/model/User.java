@@ -1,4 +1,5 @@
 package yorku.eecs.model;
+import java.util.ArrayList;
 
 public abstract class User {
     //SignUp class embedded into User class for simplicity
@@ -8,6 +9,12 @@ public abstract class User {
     private String password;
     private int id;
     private String emailAddress;
+
+    private ArrayList<Item> curRented = new ArrayList<>();
+
+    //public Cart rentCart = new Cart();
+
+    //public Cart purchaseCart = new Cart();
 
     public User() {
     }
@@ -40,4 +47,5 @@ public abstract class User {
     public String getEmailAddress(){
         return emailAddress;
     }
+
 }

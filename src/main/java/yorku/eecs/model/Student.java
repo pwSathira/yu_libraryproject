@@ -7,9 +7,6 @@ import java.util.List;
 public class Student extends User {
     private ArrayList<Course> courseList;
 
-
-
-
     public List<Course> getCourseList() {
         return courseList;
     }

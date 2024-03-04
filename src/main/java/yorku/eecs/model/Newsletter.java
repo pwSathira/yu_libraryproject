@@ -6,9 +6,7 @@ public class Newsletter {
     private String articleTitle;
     private String url;
     public void loadFrame(String url) {
-
     }
-
 
     public Boolean validateSubscription (Subscription subscription) {
 

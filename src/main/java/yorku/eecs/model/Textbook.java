@@ -11,7 +11,6 @@ public class Textbook extends Book{
 
     public static class Builder extends Book.Builder{
         private String edition;
-
         public Builder(){
             super();
         }
@@ -19,11 +18,9 @@ public class Textbook extends Book{
             this.edition = edition;
             return this;
         }
-
         public Textbook build(){
             return new Textbook(this);
         }
-
         @Override
         protected Builder self() {
             return this;
