@@ -4,6 +4,7 @@ import yorku.eecs.model.Course;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Student extends User {
     private ArrayList<Course> courseList;
 
@@ -28,5 +29,17 @@ public class Student extends User {
         return bookList;
     }
 
-
+    public List<List<String>> toCSV(int newID) {
+        List<List<String>> data = new ArrayList<>();
+        List<String> row = new ArrayList<>();
+        row.add(Integer.toString(newID));
+        row.add(getUserName());
+        row.add(getFirstName());
+        row.add(getLastName());
+        row.add(getPassword());
+//        row.add(Integer.toString(getId()));
+        row.add(getEmailAddress());
+        data.add(row);
+        return data;
+    }
 }

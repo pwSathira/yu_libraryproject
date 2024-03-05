@@ -10,11 +10,11 @@ public abstract class User {
     private int id;
     private String emailAddress;
 
-    private ArrayList<Item> curRented = new ArrayList<>();
+    //currently rented out
+    private ArrayList<Item> rentList = new ArrayList<>();
 
-    //public Cart rentCart = new Cart();
-
-    //public Cart purchaseCart = new Cart();
+    //currently subscribed items
+    private ArrayList<Item> subscribedList = new ArrayList<>();
 
     public User() {
     }
@@ -48,4 +48,7 @@ public abstract class User {
         return emailAddress;
     }
 
+    public ArrayList<Item> getSubscribedList() {return subscribedList;}
+
+    public ArrayList<Item> getRentList() {return rentList;}
 }

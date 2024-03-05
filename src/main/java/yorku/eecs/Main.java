@@ -1,8 +1,7 @@
 package yorku.eecs;
 
-import yorku.eecs.model.Book;
-import yorku.eecs.model.CD_DVD;
-import yorku.eecs.model.Magazine;
+import yorku.eecs.controller.StudentController;
+import yorku.eecs.model.*;
 import yorku.eecs.view.MainUI;
 import yorku.eecs.model.CD_DVD;
 
@@ -42,6 +41,16 @@ public class Main {
                 .isPurchasable(true)
                 .isDiscounted(false)
                 .build();
+
+        PurchaseCart purchaseCart = new PurchaseCart();
+        PurchaseCart cart = new PurchaseCart();
+        cart.checkout();
+
+        Student student = new Student();
+        StudentController studentController = new StudentController();
+        studentController.createStudent(student);
+        studentController.readStudent("2000");
+
 
     }
     //vin was here

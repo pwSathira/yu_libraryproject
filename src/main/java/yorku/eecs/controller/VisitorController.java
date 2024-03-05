@@ -1,4 +1,4 @@
 package yorku.eecs.controller;
 
-public class BookController {
+public class VisitorController {
 }

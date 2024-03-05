@@ -2,10 +2,8 @@ package yorku.eecs.model;
 
 import java.util.ArrayList;
 
-public class PurchaseCart extends Cart{
-    ArrayList<Item> items = new ArrayList<Item>();
-
-    public PurchaseCart() {}
+public class RentCart extends Cart{
+    public RentCart() {}
 
     @Override
     public void checkout() {
