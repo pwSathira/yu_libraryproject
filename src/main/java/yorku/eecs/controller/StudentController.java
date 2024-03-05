@@ -43,7 +43,7 @@ public class StudentController {
     }
 
     public String CSVtoString(Student student) {
-        String filePath = ""; //Replace this with the filepath of csv file
+        String filePath = "src/main/resources/data/userdata.csv"; //Replace this with the filepath of csv file
         BufferedReader reader = null;
         String line = "";
         try {
