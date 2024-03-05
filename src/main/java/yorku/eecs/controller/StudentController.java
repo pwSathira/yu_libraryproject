@@ -3,6 +3,7 @@ package yorku.eecs.controller;
 import yorku.eecs.logic.CsvUtil;
 import yorku.eecs.model.Student;
 import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class StudentController {
     Student student;
@@ -41,9 +42,22 @@ public class StudentController {
         // TODO implement here
     }
 
-    public String toCSV(Student student) {
-//        String 
-        return null;
+    public String CSVtoString(Student student) {
+        String filePath = ""; //Replace this with the filepath of csv file
+        BufferedReader reader = null;
+        String line = "";
+        try {
+            reader = new BufferedReader(new FileReader(filePath));
+            while ((line = reader.readLine()) != null) {
+                String[] columns = line.split(",");
+                if (columns[0] == Integer.toString(student.getId())) {
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return line;
     }
 
 

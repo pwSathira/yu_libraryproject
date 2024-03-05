@@ -48,6 +48,10 @@ public abstract class User {
         return emailAddress;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public ArrayList<Item> getSubscribedList() {return subscribedList;}
 
     public ArrayList<Item> getRentList() {return rentList;}
