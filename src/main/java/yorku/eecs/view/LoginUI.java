@@ -1,8 +1,6 @@
 package yorku.eecs.view;
 
-import yorku.eecs.controller.ViewSwitcher;
-
-import javax.swing.*;
+import yorku.eecs.controller.card.ViewSwitcher;
 
 public class LoginUI extends AuthBaseUI {
     public LoginUI(ViewSwitcher viewSwitcher) {

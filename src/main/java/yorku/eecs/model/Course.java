@@ -1,4 +1,6 @@
 package yorku.eecs.model;
+import yorku.eecs.model.item.Book;
+
 import java.util.Date;
 
 public class Course {

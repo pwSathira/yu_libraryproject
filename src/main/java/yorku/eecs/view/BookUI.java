@@ -1,10 +1,8 @@
 package yorku.eecs.view;
 
-import yorku.eecs.controller.ViewSwitcher;
+import yorku.eecs.controller.card.ViewSwitcher;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class BookUI extends JPanel {
     private ViewSwitcher viewSwitcher;

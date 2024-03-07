@@ -1,3 +1,3 @@
-int itemID, String itemName, String location, String publisher, int price, boolean isRentable, boolean isPurchasable, ISSN
-300000000, Space, Magazine Room, National Geographic, 10.99, true, true,  0214-6832
-300000001, Places to Travel, Magazine Room, Reader's Digest, 8.99, true, true, 0122-2343
+itemID,itemName,location,publisher,price,quantity,ISSN
+300000000,National Geographic,Magazine Rack,National Geographic Society,5,20,00279358
+300000001,The Economist,Magazine Rack,The Economist Newspaper Limited,10,20,00130613

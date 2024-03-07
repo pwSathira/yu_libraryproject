@@ -1,7 +1,7 @@
 package yorku.eecs.view;
 
 import net.miginfocom.swing.MigLayout;
-import yorku.eecs.controller.ViewSwitcher;
+import yorku.eecs.controller.card.ViewSwitcher;
 
 import javax.swing.*;
 import java.awt.*;

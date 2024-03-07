@@ -1,7 +1,5 @@
 package yorku.eecs.logic;
 
-import yorku.eecs.model.Student;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;

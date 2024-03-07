@@ -1,10 +1,11 @@
 package yorku.eecs;
 
 import yorku.eecs.controller.ControllerError;
-import yorku.eecs.controller.UserController;
-import yorku.eecs.model.*;
+import yorku.eecs.model.cart.PurchaseCart;
+import yorku.eecs.model.item.Book;
+import yorku.eecs.model.item.Magazine;
 import yorku.eecs.view.MainUI;
-import yorku.eecs.model.CD_DVD;
+import yorku.eecs.model.item.CD_DVD;
 
 public class Main {
     public static void main(String[] args) throws ControllerError {
@@ -16,9 +17,7 @@ public class Main {
                 .price(1)
                 .location("Test")
                 .publisher("Test")
-                .isRentable(true)
-                .isPurchasable(true)
-                .isDiscounted(false)
+                .quantity(20)
                 .build();
 
         Book book = new Book.Builder()
@@ -27,9 +26,7 @@ public class Main {
                 .price(1)
                 .location("Test")
                 .publisher("Test")
-                .isRentable(true)
-                .isPurchasable(true)
-                .isDiscounted(false)
+                .quantity(20)
                 .build();
 
         Magazine magazine = new Magazine.Builder()
@@ -38,21 +35,12 @@ public class Main {
                 .price(1)
                 .location("Test")
                 .publisher("Test")
-                .isRentable(true)
-                .isPurchasable(true)
-                .isDiscounted(false)
+                .quantity(20)
                 .build();
 
         PurchaseCart purchaseCart = new PurchaseCart();
         PurchaseCart cart = new PurchaseCart();
         cart.checkout();
-
-        UserController userController = new UserController();
-        Student user = (Student) userController.readUser("200000000", "Student");
-        System.out.println(user.getUserName());
-
-
-
     }
     //vin was here
 }

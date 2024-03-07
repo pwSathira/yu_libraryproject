@@ -1,8 +1,8 @@
 package yorku.eecs.view;
 
-import yorku.eecs.controller.ViewSwitcher;
-import yorku.eecs.controller.CardController;
-import yorku.eecs.model.User;
+import yorku.eecs.controller.card.ViewSwitcher;
+import yorku.eecs.controller.card.CardController;
+import yorku.eecs.model.user.User;
 
 import javax.swing.*;
 import java.awt.*;
