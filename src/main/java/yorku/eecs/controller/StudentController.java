@@ -1,64 +1,73 @@
 package yorku.eecs.controller;
 
 import yorku.eecs.logic.CsvUtil;
+import yorku.eecs.logic.FilePath;
 import yorku.eecs.model.Student;
 import java.io.BufferedReader;
 import java.io.FileReader;
-
+import java.util.List;
+/*
+* CRUD Operations for Student Model
+*
+*
+*
+*
+ */
 public class StudentController {
     Student student;
-    private final String path = "src/main/resources/data/studentdata.csv";
+    private final String path = FilePath.STUDENTDATA.getPath();
 
-    public void createStudent(Student student) {
+    public void createStudent(Student student) throws ControllerError{
         this.student = student;
         try {
-            //Read CSV to see latest ID
-            String id = CsvUtil.getLastID(path);
-            //Increment ID
-            int newID = Integer.parseInt(id) + 1;
-            String record = student.getFirstName() + "," + student.getLastName() + "," + newID;
-            CsvUtil.writeCsv(student.toCSV(newID), path);
+            String currentId = CsvUtil.getLastInstanceByColumn(path, 0);
+            assert currentId != null;
+            currentId = Integer.toString(Integer.parseInt(currentId) + 1);
+            CsvUtil.writeCsv(student.toCSV(student.getId()), path, true);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ControllerError("Student creation failed");
         }
     }
 
-    public void updateStudent() {
-        // TODO implement here
-    }
-
-    public Student readStudent(String id) {
+    public void updateStudent(Student student) throws ControllerError{
         try {
-            String record = CsvUtil.getRecordByID(path, id);
-            String[] values = record.split(",");
-            Student student = new Student();
-
+            List<String> record = CsvUtil.getRecordByColumn(path, student.getStringId(), 0);
+            assert record != null;
+            record.set(0, student.getUserName());
+            record.set(1, student.getFirstName());
+            record.set(2, student.getLastName());
+            record.set(3, student.getPassword());
+            record.set(4, student.getEmailAddress());
+            CsvUtil.writeCsv(student.toCSV(student.getId()), path, false);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new ControllerError("Student update failed");
         }
-        return null;
+    }
+
+    public Student readStudent(String id) throws ControllerError{
+        try {
+            List<String> record = CsvUtil.getRecordByColumn(path, student.getStringId(), 0);
+            printRecords(record);
+            Student student = new Student();
+            assert record != null;
+            student.setId(Integer.parseInt(record.get(0)));
+            student.setUserName(record.get(1));
+            student.setFirstName(record.get(2));
+            student.setLastName(record.get(3));
+            student.setEmailAddress(record.get(4));
+            student.setPassword(record.get(5));
+            return student;
+        } catch (Exception e) {
+            throw new ControllerError("Student not found");
+        }
     }
     public void deleteStudent() {
         // TODO implement here
     }
 
-    public String CSVtoString(Student student) {
-        String filePath = "src/main/resources/data/userdata.csv"; //Replace this with the filepath of csv file
-        BufferedReader reader = null;
-        String line = "";
-        try {
-            reader = new BufferedReader(new FileReader(filePath));
-            while ((line = reader.readLine()) != null) {
-                String[] columns = line.split(",");
-                if (columns[0] == Integer.toString(student.getId())) {
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void printRecords(List<String> records) {
+        for (String record : records) {
+            System.out.println(record);
         }
-        return line;
     }
-
-
 }

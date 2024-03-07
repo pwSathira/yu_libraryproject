@@ -1,12 +1,13 @@
 package yorku.eecs;
 
+import yorku.eecs.controller.ControllerError;
 import yorku.eecs.controller.StudentController;
 import yorku.eecs.model.*;
 import yorku.eecs.view.MainUI;
 import yorku.eecs.model.CD_DVD;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ControllerError {
         System.out.println("YorkU booting...");
         MainUI main = new MainUI();
         CD_DVD cdDvd = new CD_DVD.Builder()
@@ -48,8 +49,7 @@ public class Main {
 
         Student student = new Student();
         StudentController studentController = new StudentController();
-        studentController.createStudent(student);
-        studentController.readStudent("2000");
+        studentController.readStudent("200000000");
 
 
     }

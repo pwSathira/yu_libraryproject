@@ -43,7 +43,6 @@ public class Debit implements PaymentOptions{
 
     public void setCardHolderName(String cardHolderName) {
         this.cardHolderName = cardHolderName;
-
     }
 
 
@@ -55,7 +54,6 @@ public class Debit implements PaymentOptions{
 
     public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
-
     }
 
 

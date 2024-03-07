@@ -1,5 +1,6 @@
 package yorku.eecs.view;
 
+import yorku.eecs.controller.StudentController;
 import yorku.eecs.controller.ViewSwitcher;
 
 import javax.swing.*;

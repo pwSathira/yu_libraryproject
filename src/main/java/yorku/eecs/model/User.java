@@ -24,35 +24,37 @@ public abstract class User {
         this.password = password;
     }
 
-    //get first Name
+    //GETTERS
     public String getFirstName() {
         return firstName;
     }
-
-    //get Last Name
     public String getLastName() {
         return lastName;
     }
-
-    //get user's User Name
     public String getUserName() {
         return userName;
     }
-
-    //get User Password
     public String getPassword(){
         return password;
     }
-
     public String getEmailAddress(){
         return emailAddress;
     }
-
     public int getId() {
         return id;
     }
-
+    public String getStringId() {return Integer.toString(id);}
     public ArrayList<Item> getSubscribedList() {return subscribedList;}
-
     public ArrayList<Item> getRentList() {return rentList;}
+
+    //SETTERS
+    public void setUserName(String userName) {this.userName = userName;}
+    public void setFirstName(String firstName) {this.firstName = firstName;}
+    public void setLastName(String lastName) {this.lastName = lastName;}
+    public void setPassword(String password) {this.password = password;}
+    public void setId(int id) {this.id = id;}
+    public void setEmailAddress(String emailAddress) {this.emailAddress = emailAddress;}
+    public void setSubscribedList(ArrayList<Item> subscribedList) {this.subscribedList = subscribedList;}
+    public void setRentList(ArrayList<Item> rentList) {this.rentList = rentList;}
+
 }
