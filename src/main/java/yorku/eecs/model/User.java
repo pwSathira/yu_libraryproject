@@ -1,5 +1,6 @@
 package yorku.eecs.model;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class User {
     //SignUp class embedded into User class for simplicity
@@ -57,4 +58,16 @@ public abstract class User {
     public void setSubscribedList(ArrayList<Item> subscribedList) {this.subscribedList = subscribedList;}
     public void setRentList(ArrayList<Item> rentList) {this.rentList = rentList;}
 
+    public List<List<String>> toCSV(int id) {
+        List<List<String>> data = new ArrayList<>();
+        List<String> row = new ArrayList<>();
+        row.add(Integer.toString(id));
+        row.add(getUserName());
+        row.add(getFirstName());
+        row.add(getLastName());
+        row.add(getEmailAddress());
+        row.add(getPassword());
+        data.add(row);
+        return data;
+    }
 }

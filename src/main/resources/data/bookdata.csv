@@ -1,0 +1,5 @@
+int itemID, String itemName, String location, String publisher, int price, boolean isRentable, boolean isPurchasable, ISBN
+100000000, The Amazing Spider-Man, Comic Room, Marvel, 3.99, true, true, 331-3-4728-9422-1
+100000001, The Dark Knight Returns, Comic Room, DC Comics, 12.99, true, true, 323-1-4733-9411-2
+
+

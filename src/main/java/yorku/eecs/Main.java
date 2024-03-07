@@ -1,7 +1,7 @@
 package yorku.eecs;
 
 import yorku.eecs.controller.ControllerError;
-import yorku.eecs.controller.StudentController;
+import yorku.eecs.controller.UserController;
 import yorku.eecs.model.*;
 import yorku.eecs.view.MainUI;
 import yorku.eecs.model.CD_DVD;
@@ -47,9 +47,10 @@ public class Main {
         PurchaseCart cart = new PurchaseCart();
         cart.checkout();
 
-        Student student = new Student();
-        StudentController studentController = new StudentController();
-        studentController.readStudent("200000000");
+        UserController userController = new UserController();
+        Student user = (Student) userController.readUser("200000000", "Student");
+        System.out.println(user.getUserName());
+
 
 
     }

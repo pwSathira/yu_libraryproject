@@ -1,8 +1,0 @@
-int itemID, String itemName, String location, String publisher, int price, boolean isRentable, boolean isPurchasable
-100000000, The Amazing Spider-Man, Comic Room, Marvel, 3.99, true, true
-100000001, The Dark Knight Returns, Comic Room, DC Comics, 12.99, true, true
-200000000, Oppenheimer, Movie Room, Universal Pictures, 21.99, true, true
-200000001, Interstellar, Movie Room, Warner Brothers, 21.99, true, true
-300000000, Space, Magazine Room, National Geographic, 10.99, true, true
-300000001, Places to Travel, Magazine Room, Reader's Digest, 8.99, true, true
-

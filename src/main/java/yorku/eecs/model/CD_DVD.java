@@ -8,7 +8,6 @@ public class CD_DVD extends Item{
         super(builder);
         this.UPC = builder.UPC;
     }
-
     //getter
     public String getUPC() { return this.UPC; }
 

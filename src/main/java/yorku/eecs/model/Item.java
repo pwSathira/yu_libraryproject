@@ -13,6 +13,7 @@ public abstract class Item {
     private boolean isRentable;
     private boolean isPurchasable;
     private boolean isDiscounted;
+    private int quantity;
 
     //Takes in a Builder object and sets the values of the Item object
     protected Item(Builder<?> builder) {
@@ -24,6 +25,7 @@ public abstract class Item {
         this.isRentable = builder.isRentable;
         this.isPurchasable = builder.isPurchasable;
         this.isDiscounted = builder.isDiscounted;
+        this.quantity = builder.quantity;
     }
 
     //Getters of the Item object
@@ -35,6 +37,19 @@ public abstract class Item {
     public boolean getIsRentable() { return this.isRentable; }
     public boolean getIsPurchasable() { return this.isPurchasable; }
     public boolean getIsDiscounted() { return this.isDiscounted; }
+    public int getQuantity(){return this.quantity;}
+    public String getStringId() {return Integer.toString(itemID);}
+
+    //Setters of the Item object
+    public void setItemID(int itemID) { this.itemID = itemID; }
+    public void setItemName(String itemName) { this.itemName = itemName; }
+    public void setLocation(String location) { this.location = location; }
+    public void setPublisher(String publisher) { this.publisher = publisher; }
+    public void setPrice(int price) { this.price = price; }
+    public void setIsRentable(boolean isRentable) { this.isRentable = isRentable; }
+    public void setIsPurchasable(boolean isPurchasable) { this.isPurchasable = isPurchasable; }
+    public void setIsDiscounted(boolean isDiscounted) { this.isDiscounted = isDiscounted; }
+    public void setQuantity(int quantity) {this.quantity = quantity;}
 
     //Abstract Builder class
     //Takes in a Builder object and sets the values of the Item object
@@ -49,7 +64,17 @@ public abstract class Item {
         private boolean isPurchasable = true;
         private boolean isDiscounted = false;
 
+        private int quantity = 20;
+
         public Builder() {}
+
+        public void itemConstructor (int itemID, String itemName, String location, String publisher, int price){
+            this.itemID = itemID;
+            this.itemName = itemName;
+            this.location = location;
+            this.publisher = publisher;
+            this.price = price;
+        }
 
         public T itemID(int itemID) {
             this.itemID = itemID;
@@ -88,6 +113,11 @@ public abstract class Item {
 
         public T isDiscounted(boolean isDiscounted) {
             this.isDiscounted = isDiscounted;
+            return self();
+        }
+
+        public T quantity (int quantity) {
+            this.quantity = quantity;
             return self();
         }
 
