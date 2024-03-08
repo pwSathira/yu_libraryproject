@@ -40,6 +40,8 @@ public class MainUI extends JFrame implements ViewSwitcher {
         cardPanel.add(registerUI, "Register");
         BookUI bookUI = new BookUI(this);
         cardPanel.add(bookUI, "Book");
+        AuthUI authUI = new AuthUI(this);
+        cardPanel.add(authUI, "Auth");
     }
     @Override
     public void switchView(String viewName) {

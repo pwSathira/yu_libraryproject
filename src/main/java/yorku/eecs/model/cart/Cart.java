@@ -4,20 +4,15 @@ import yorku.eecs.model.item.Item;
 
 import java.util.ArrayList;
 
-public class Cart {
-    private ArrayList<Item> items = new ArrayList<Item>();
+public abstract class Cart {
 
-    public Cart() {
-    }
+    ArrayList<Item> items = new ArrayList<Item>();
+
     public void addItem(Item item) {
         items.add(item);
     }
 
-    public void removeItem(Item item) {
-        items.remove(item);
-    }
+    public void removeItem(Item item);
 
-    public void checkout() {
-        System.out.println("Checkout: Cart");
-    }
+    public void checkout();
 }

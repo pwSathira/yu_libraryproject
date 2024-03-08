@@ -49,10 +49,10 @@ public class UserController {
         }
     }
     //Read a user
-    public User readUser(String id, String userType) throws ControllerError{
+    public User readUser(String email, String userType) throws ControllerError{
         setPathBasedOnUserType(userType);
         try {
-            List<String> record = CsvUtil.getRecordByColumn(path, id, 0);
+            List<String> record = CsvUtil.getRecordByColumn(path, email, 4);
             if (record == null) {
                 throw new ControllerError("User not found");
             }

@@ -16,9 +16,6 @@ public class RegisterUI extends AuthBaseUI {
         leftPanel.add(confirmPasswordLabel);
         leftPanel.add(confirmPasswordField, "wrap");
         addFooterLabel(this.leftPanel);
-//        User
-        UserController userController = new UserController();
-//        userController.createUser()
 
     }
 

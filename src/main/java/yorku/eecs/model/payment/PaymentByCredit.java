@@ -4,7 +4,7 @@ public class PaymentByCredit implements PaymentMethod {
 
     private Credit creditCard;
 
-    public void pay() {
+    public void pay(int total) {
 
        // creditCard = new Credit()
 

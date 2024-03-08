@@ -20,40 +20,22 @@ public abstract class AuthBaseUI extends JPanel {
 
     public AuthBaseUI(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
-        String logoPath = "src/main/resources/static/loginui/LoginUI_Logo.png";
-        ImageIcon titleIcon = new ImageIcon(logoPath);
-        titleIcon = ImageProcessor.resizeIcon(titleIcon, 300, 100);
-        setLayout(new MigLayout("insets 0, fill", "[30%]0[70%]", "[grow]"));
-        JPanel leftPanel = new JPanel(new MigLayout("wrap 2", "[][grow,fill]", "[]10[]10[]10[]"));
-        leftPanel.setBackground(Color.WHITE);
-        leftPanel.setBorder(new EmptyBorder(20,20,20,20));
-        JButton titleButton = new JButton(titleIcon);
-        buttonIconFunctions(titleIcon, titleButton);
+        addGeneralLayout();
+        add(leftPanel, "grow");
+        add(rightPanel, "grow");
+    }
+
+    protected void addAuthLabel(){
         usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);
         JLabel usernameLabel = new JLabel("Username");
         usernameLabel.setFont(new Font("Arial", Font.BOLD, 12));
         JLabel passwordLabel = new JLabel("Password");
         passwordLabel.setFont(new Font("Arial", Font.BOLD, 12));
-
-        leftPanel.add(titleButton, "span, align center, wrap, gaptop 100");
         leftPanel.add(usernameLabel);
         leftPanel.add(usernameField, "align center, wrap");
         leftPanel.add(passwordLabel);
         leftPanel.add(passwordField, "align center, wrap");
-        this.leftPanel = leftPanel;
-
-        String bgPath = "src/main/resources/static/loginui/LoginUI_BG.png";
-        BackgroundPanel rightPanel = new BackgroundPanel(bgPath);
-        rightPanel.setBackground(new Color(0xE31837));
-        this.rightPanel = rightPanel;
-
-        add(leftPanel, "grow");
-        add(rightPanel, "grow");
-    }
-
-    protected void addAuthLabel(){
-
     }
 
     protected abstract void checkLogin();
@@ -70,7 +52,25 @@ public abstract class AuthBaseUI extends JPanel {
         panel.add(footerLabel, "span, align center, wrap");
     }
 
-    private void buttonIconFunctions(ImageIcon icon, JButton button) {
+    protected void addGeneralLayout(){
+        String logoPath = "src/main/resources/static/loginui/LoginUI_Logo.png";
+        ImageIcon titleIcon = new ImageIcon(logoPath);
+        titleIcon = ImageProcessor.resizeIcon(titleIcon, 300, 100);
+        setLayout(new MigLayout("insets 0, fill", "[30%]0[70%]", "[grow]"));
+        JPanel leftPanel = new JPanel(new MigLayout("wrap 2", "[][grow,fill]", "[]10[]10[]10[]"));
+        leftPanel.setBackground(Color.WHITE);
+        leftPanel.setBorder(new EmptyBorder(20,20,20,20));
+        JButton titleButton = new JButton(titleIcon);
+        buttonIconFunctions(titleIcon, titleButton);
+        leftPanel.add(titleButton, "span, align center, wrap, gaptop 100");
+        String bgPath = "src/main/resources/static/loginui/LoginUI_BG.png";
+        BackgroundPanel rightPanel = new BackgroundPanel(bgPath);
+        rightPanel.setBackground(new Color(0xE31837));
+        this.leftPanel = leftPanel;
+        this.rightPanel = rightPanel;
+    }
+
+    protected void buttonIconFunctions(ImageIcon icon, JButton button) {
         button.setBorder(null);
         button.setFocusPainted(false);
         button.setContentAreaFilled(false);

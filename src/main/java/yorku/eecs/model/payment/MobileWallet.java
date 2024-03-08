@@ -1,6 +1,6 @@
 package yorku.eecs.model.payment;
 
-public class MobileWallet extends PaymentMethod{
+public class MobileWallet {
     private String accountNumber;
     private String accountUsername;
 
@@ -13,5 +13,4 @@ public class MobileWallet extends PaymentMethod{
     public String getAccountUsername() { return this.accountUsername; }
     public void setAccountNumber(String accountNumber) { this.accountNumber = accountNumber; }
     public void setAccountUsername(String accountUsername) { this.accountUsername = accountUsername; }
-
 }

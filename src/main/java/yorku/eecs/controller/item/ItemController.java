@@ -46,8 +46,7 @@ public class ItemController {
         setPathBasedOnItemType(itemType);
         try {
           List<String> record = CsvUtil.getRecordByColumn(path, id, 0);
-            if (record != null) {return ItemFactory.createItem(itemType, record);}
-
+          if (record != null) {return ItemFactory.createItem(itemType, record);}
         } catch (Exception e) {
             throw new ControllerError("Error reading item", e);
         }
@@ -57,7 +56,9 @@ public class ItemController {
     public void deleteItem(Item item) throws ControllerError {
         setPathBasedOnItemType(item);
         try {
-            System.out.println("Deleting item: " + item.getItemID());
+            List<List<String>> records = CsvUtil.readCsv(path);
+            records.removeIf(record -> record.get(0).equals(item.getStringId()));
+            CsvUtil.writeCsv(records, path, false);
         } catch (CSVError e) {
             throw new ControllerError("Item deletion failed", e);
         }
