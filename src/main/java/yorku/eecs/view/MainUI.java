@@ -52,5 +52,10 @@ public class MainUI extends JFrame implements ViewSwitcher {
         cardController.setUser(user);
     }
 
+    @Override
+    public User getUser() {
+        return cardController.getUser();
+    }
+
 
 }

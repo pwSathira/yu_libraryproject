@@ -3,17 +3,19 @@ package yorku.eecs.view;
 import net.miginfocom.swing.MigLayout;
 import yorku.eecs.controller.card.ViewSwitcher;
 import yorku.eecs.logic.BackgroundPanel;
+import yorku.eecs.logic.IdField;
 import yorku.eecs.logic.ImageProcessor;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public abstract class AuthBaseUI extends JPanel {
     protected ViewSwitcher viewSwitcher;
-    protected JTextField usernameField;
+    protected IdField idField;
     protected JPasswordField passwordField;
     protected JPanel leftPanel;
     protected BackgroundPanel rightPanel;
@@ -26,21 +28,22 @@ public abstract class AuthBaseUI extends JPanel {
     }
 
     protected void addAuthLabel(){
-        usernameField = new JTextField(20);
+        idField = new IdField();
+        idField.setColumns(20);
         passwordField = new JPasswordField(20);
         JLabel usernameLabel = new JLabel("Username");
         usernameLabel.setFont(new Font("Arial", Font.BOLD, 12));
         JLabel passwordLabel = new JLabel("Password");
         passwordLabel.setFont(new Font("Arial", Font.BOLD, 12));
         leftPanel.add(usernameLabel);
-        leftPanel.add(usernameField, "align center, wrap");
+        leftPanel.add(idField, "align center, wrap");
         leftPanel.add(passwordLabel);
         leftPanel.add(passwordField, "align center, wrap");
     }
 
-    protected abstract void checkLogin();
+    protected abstract void onButtonClicked(String actionCommand);
 
-    protected void addFooterLabel(JPanel panel) {
+    protected JButton addFooterLabel(JPanel panel) {
         String arrowPath = "src/main/resources/static/loginui/LoginUI_Arrow.png";
         ImageIcon buttonIcon = new ImageIcon(arrowPath);
         buttonIcon = ImageProcessor.resizeIcon(buttonIcon, 50, 50);
@@ -50,6 +53,7 @@ public abstract class AuthBaseUI extends JPanel {
         JLabel footerLabel = new JLabel("version 0.1 Alpha");
         footerLabel.setFont(new Font("Arial", Font.ITALIC, 12));
         panel.add(footerLabel, "span, align center, wrap");
+        return loginButton;
     }
 
     protected void addGeneralLayout(){
@@ -77,7 +81,7 @@ public abstract class AuthBaseUI extends JPanel {
         button.setFocusable(false);
         ImageIcon darkenedIcon = ImageProcessor.darkenImageIcon(icon, 0.5f);
 
-        //Button Hover Effects
+        // Button Hover Effects
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -87,13 +91,9 @@ public abstract class AuthBaseUI extends JPanel {
             public void mouseExited(MouseEvent e) {
                 button.setIcon(icon);
             }
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                checkLogin();
-            }
         });
-
     }
+
+
 
 }

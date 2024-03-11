@@ -18,8 +18,8 @@ public class RegisterUI extends AuthBaseUI {
         addFooterLabel(this.leftPanel);
 
     }
-
     @Override
-    protected void checkLogin() {
+    protected void onButtonClicked(String actionCommand) {
+
     }
 }

@@ -16,10 +16,14 @@ public class PasswordChecker {
 
     public boolean checkStrength(String password){
         try{
-            for(int i = 0; i < password.length(); i++){
+            for(int i = 0; i < password.length() - 2; i++){
                 if(password.charAt(i) == password.charAt(i+1) && password.charAt(i+1) == password.charAt(i+2)){
                     return false;
                 }
+            }
+
+            for(int i = 0; i < password.length(); i++){
+
             }
             if(password.length()<8 && password.length() > 20){
                 return false;

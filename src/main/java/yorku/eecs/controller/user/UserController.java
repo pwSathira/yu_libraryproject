@@ -1,8 +1,6 @@
 package yorku.eecs.controller.user;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import yorku.eecs.controller.ControllerError;
-import yorku.eecs.controller.item.ItemController;
 import yorku.eecs.logic.CSVError;
 import yorku.eecs.logic.CsvUtil;
 import yorku.eecs.logic.FilePath;
@@ -49,10 +47,10 @@ public class UserController {
         }
     }
     //Read a user
-    public User readUser(String email, String userType) throws ControllerError{
+    public User readUser(String id, String userType) throws ControllerError{
         setPathBasedOnUserType(userType);
         try {
-            List<String> record = CsvUtil.getRecordByColumn(path, email, 4);
+            List<String> record = CsvUtil.getRecordByColumn(path, id, 0);
             if (record == null) {
                 throw new ControllerError("User not found");
             }
@@ -125,5 +123,24 @@ public class UserController {
         } catch (Exception e) {
             throw new ControllerError("Checking if user exists failed");
         }
+    }
+
+    public String determineUserType(String id){
+        if(id.startsWith("1")){
+            return "Faculty";
+        }else if(id.startsWith("2")){
+            return "Student";
+        }else if(id.startsWith("3")){
+            return "NonFaculty";
+        }else if(id.startsWith("4")){
+            return "Visitor";
+        }
+        return null;
+    }
+
+    public boolean authenticateUser(User userDB, User userInput) {
+        boolean id = userDB.getStringId().equals(userInput.getStringId());
+        boolean password = userDB.getPassword().equals(userInput.getPassword());
+        return password && id;
     }
 }

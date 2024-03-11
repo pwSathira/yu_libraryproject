@@ -53,4 +53,12 @@ public class AdminController{
     public void deleteUser(User user) throws ControllerError {
         userController.deleteUser(user);
     }
+    // Determine user type
+    public String determineUserType(String id) {
+        return userController.determineUserType(id);
+    }
+
+    public boolean authenticateUser(User userDB, User userInput) {
+        return userController.authenticateUser(userDB, userInput);
+    }
 }
