@@ -30,6 +30,7 @@ public class UserController {
             throw new ControllerError("User creation failed");
         }
     }
+
     //Update a user
     public void updateUser(User user) throws ControllerError{
         setPathBasedOnUserType(user);
@@ -114,14 +115,28 @@ public class UserController {
     public boolean checkUserExists(User user) throws ControllerError {
         setPathBasedOnUserType(user);
         try {
-            List<String> record = CsvUtil.getRecordByColumn(path, user.getUserName(), 1);
-            assert record != null;
-            if (record.isEmpty()) {
-                return false;
-            };
-            return true;
+            // Check if YorkID is taken
+            List<String> recordById = CsvUtil.getRecordByColumn(path, user.getStringId(), 0);
+            if (recordById != null && !recordById.isEmpty()) {
+                return true; // YorkID is taken
+            }
+
+            // Check if Username is taken
+            List<String> recordByUsername = CsvUtil.getRecordByColumn(path, user.getUserName(), 1);
+            if (recordByUsername != null && !recordByUsername.isEmpty()) {
+                return true; // Username is taken
+            }
+
+            // Check if Email is taken
+            List<String> recordByEmail = CsvUtil.getRecordByColumn(path, user.getEmailAddress(), 4);
+            if (recordByEmail != null && !recordByEmail.isEmpty()) {
+                return true; // Email is taken
+            }
+
+            // If none of the fields match, then the user does not exist in the database
+            return false;
         } catch (Exception e) {
-            throw new ControllerError("Checking if user exists failed");
+            throw new ControllerError("Checking if user exists failed", e);
         }
     }
 
@@ -142,5 +157,13 @@ public class UserController {
         boolean id = userDB.getStringId().equals(userInput.getStringId());
         boolean password = userDB.getPassword().equals(userInput.getPassword());
         return password && id;
+    }
+
+    public void addToAdminQueue(User user) {
+        try {
+            CsvUtil.writeCsv(user.toCSV(user.getId()), FilePath.ADMINQUEUEDATA.getPath(), true);
+        } catch (CSVError e) {
+            e.printStackTrace();
+        }
     }
 }
