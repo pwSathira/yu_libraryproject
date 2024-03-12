@@ -1,5 +1,14 @@
 package yorku.eecs.view;
 
-public class TemplateUI {
+import yorku.eecs.controller.card.ViewSwitcher;
+
+import javax.swing.*;
+
+public class TemplateUI extends JPanel {
+
+    public TemplateUI(ViewSwitcher viewSwitcher) {
+
+    }
+
 
 }
