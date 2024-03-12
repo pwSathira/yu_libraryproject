@@ -62,7 +62,7 @@ public class PasswordChecker {
         return containDigit;
     }
 
-    public boolean checkLength(String password){
+    public static boolean checkLength(String password){
         // Checks for password length
         boolean passwordLength = false;
         if(password.length() > 7){
@@ -72,7 +72,7 @@ public class PasswordChecker {
         return passwordLength;
     }
 
-    public boolean checkStrength(String password){
+    public static boolean checkStrength(String password){
         try{
             if(checkLength(password) && checkDigit(password) && checkRepetitions(password) && checkLowerCase(password) && checkUpperCase(password)){
                 return true;

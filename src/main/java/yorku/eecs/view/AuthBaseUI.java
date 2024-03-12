@@ -31,7 +31,7 @@ public abstract class AuthBaseUI extends JPanel {
         idField = new IdField();
         idField.setColumns(20);
         passwordField = new JPasswordField(20);
-        JLabel usernameLabel = new JLabel("Username");
+        JLabel usernameLabel = new JLabel("YorkID");
         usernameLabel.setFont(new Font("Arial", Font.BOLD, 12));
         JLabel passwordLabel = new JLabel("Password");
         passwordLabel.setFont(new Font("Arial", Font.BOLD, 12));
@@ -43,7 +43,7 @@ public abstract class AuthBaseUI extends JPanel {
 
     protected abstract void onButtonClicked(String actionCommand);
 
-    protected JButton addFooterLabel(JPanel panel) {
+    protected JButton addFooterLabel(JPanel panel, ActionListener actionListener, String actionCommand){
         String arrowPath = "src/main/resources/static/loginui/LoginUI_Arrow.png";
         ImageIcon buttonIcon = new ImageIcon(arrowPath);
         buttonIcon = ImageProcessor.resizeIcon(buttonIcon, 50, 50);
@@ -53,6 +53,8 @@ public abstract class AuthBaseUI extends JPanel {
         JLabel footerLabel = new JLabel("version 0.1 Alpha");
         footerLabel.setFont(new Font("Arial", Font.ITALIC, 12));
         panel.add(footerLabel, "span, align center, wrap");
+        loginButton.setActionCommand(actionCommand);
+        loginButton.addActionListener(actionListener);
         return loginButton;
     }
 

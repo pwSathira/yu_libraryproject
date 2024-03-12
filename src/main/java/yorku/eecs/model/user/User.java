@@ -22,8 +22,8 @@ public abstract class User {
     public User() {
     }
 
-    public User(String userName, String password) {
-        this.userName = userName;
+    public User(String id, String password) {
+        this.id=Integer.parseInt(id);
         this.password = password;
     }
 

@@ -16,10 +16,8 @@ public class LoginUI extends AuthBaseUI {
         super(viewSwitcher);
         addAuthLabel();
 
-        //Footer
-        this.loginButton = addFooterLabel(this.leftPanel);
-        loginButton.setActionCommand("Login");
-        loginButton.addActionListener(e -> onButtonClicked(e.getActionCommand()));
+        ActionListener actionListener = e -> onButtonClicked(e.getActionCommand());
+        this.loginButton = addFooterLabel(this.leftPanel, actionListener, "Login");
 
         //Enter key listener
         ActionListener enterPressedListener = e -> onButtonClicked("Login");
@@ -28,12 +26,19 @@ public class LoginUI extends AuthBaseUI {
     }
 
     @Override
+    protected JButton addFooterLabel(JPanel panel, ActionListener actionListener, String actionCommand) {
+        JButton loginButton = super.addFooterLabel(panel, actionListener, actionCommand);
+        loginButton.setActionCommand(actionCommand);
+        return loginButton;
+    }
+    @Override
     protected void onButtonClicked(String actionCommand) {
         String id = idField.getText();
         String password = passwordField.getText();
         boolean isAuthenticated = validateCredentials(id, password);
         if (isAuthenticated) {
             viewSwitcher.setUser(user);
+            viewSwitcher.switchView("Home");
         } else {
             JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
         }

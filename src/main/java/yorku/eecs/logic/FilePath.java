@@ -8,6 +8,7 @@ public enum FilePath {
     VISITORDATA("src/main/resources/data/visitordata.csv"),
     FACULTYDATA("src/main/resources/data/facultydata.csv"),
     NONFACULTYDATA("src/main/resources/data/nonfacultydata.csv"),
+    ADMINQUEUEDATA("src/main/resources/data/adminqueuedata.csv"),
 
     //List Data
     COURSELIST("src/main/resources/data/courselist.csv"),
