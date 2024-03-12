@@ -7,6 +7,7 @@ import yorku.eecs.model.item.Magazine;
 import yorku.eecs.view.MainUI;
 import yorku.eecs.model.item.CD_DVD;
 
+
 public class Main {
     public static void main(String[] args) throws ControllerError {
         System.out.println("YorkU booting...");
@@ -38,9 +39,21 @@ public class Main {
                 .quantity(20)
                 .build();
 
+
         PurchaseCart purchaseCart = new PurchaseCart();
         PurchaseCart cart = new PurchaseCart();
         cart.checkout();
+
+
+
+
+
+
     }
+
+
+
+
+
     //vin was here
 }
