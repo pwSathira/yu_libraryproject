@@ -1,4 +1,5 @@
 package yorku.eecs.model.user;
+import yorku.eecs.model.cart.RentCart;
 import yorku.eecs.model.item.Item;
 
 import java.util.ArrayList;
