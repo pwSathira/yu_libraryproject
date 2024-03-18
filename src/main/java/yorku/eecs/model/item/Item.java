@@ -25,6 +25,7 @@ public abstract class Item {
 
     //Getters of the Item object
     public int getItemID() { return this.itemID; }
+    public String getStringID(){return String.valueOf(this.itemID);}
     public String getItemName() { return this.itemName; }
     public String getLocation() { return this.location; }
     public String getPublisher() { return this.publisher; }
