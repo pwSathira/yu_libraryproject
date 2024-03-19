@@ -1,9 +1,13 @@
 package yorku.eecs;
 
 import yorku.eecs.controller.ControllerError;
+import yorku.eecs.controller.item.ItemController;
+import yorku.eecs.controller.item.RentListController;
 import yorku.eecs.model.cart.PurchaseCart;
 import yorku.eecs.model.item.Book;
 import yorku.eecs.model.item.Magazine;
+import yorku.eecs.model.user.Student;
+import yorku.eecs.model.user.Visitor;
 import yorku.eecs.view.MainUI;
 import yorku.eecs.model.item.CD_DVD;
 
@@ -19,15 +23,18 @@ public class Main {
                 .location("Test")
                 .publisher("Test")
                 .quantity(20)
+                .itemID(10004)
                 .build();
 
         Book book = new Book.Builder()
-                .ISBN("!@#")
-                .itemName("ello")
+                .ISBN("ISBN")
+                .itemName("NAME")
                 .price(1)
-                .location("Test")
-                .publisher("Test")
+                .location("LOCATION")
+                .publisher("PUBLISHER")
                 .quantity(20)
+                .expiryDate("DATE")
+                .itemID(10000)
                 .build();
 
         Magazine magazine = new Magazine.Builder()
@@ -37,13 +44,13 @@ public class Main {
                 .location("Test")
                 .publisher("Test")
                 .quantity(20)
+                .itemID(10002)
                 .build();
-
-
-        PurchaseCart purchaseCart = new PurchaseCart();
-        PurchaseCart cart = new PurchaseCart();
-        cart.checkout();
-
+        Visitor visitor = new Visitor("100000000", "password");
+        visitor.getRentList().add(magazine);
+        RentListController rentListController = new RentListController();
+        System.out.println("Visitor: " + visitor.getId() + " " + visitor.getPassword());
+        rentListController.createEntry(visitor, book);
 
 
 

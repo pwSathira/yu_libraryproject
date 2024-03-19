@@ -1,4 +1,4 @@
-itemID,itemName,location,publisher,price,quantity,UPC
+itemID,itemName,location,publisher,price,quantity,ExpiryDate,UPC
 200000000,Inception,Scott Library,Warner Bros,20,20,883929409464
 200000001,The Matrix,Scott Library,Warner Bros,15,20,8839294545630
 200000002,Test,Test,Test,1,20,Test

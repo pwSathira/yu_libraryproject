@@ -19,39 +19,47 @@ public class RentListController {
     Format:
     First column: User ID
     Second column: List of items the user has checked out
-    Third column: Corresponding expiration dates for the list of items
     Uses rentlist.csv for data
      */
     private String path = "src/main/resources/data/rentlist.csv";
 
     //Creating Entry
-    public void createEntry(User user) throws ControllerError {
-       ArrayList<Item> rentList = user.getRentList();
-       try {
-            List<String> record = CsvUtil.getRecordByColumn(path, user.getStringId(), 0);
-           List<List<String>> records = CsvUtil.readCsv(path);
-            if (record == null) {
-                //Create new entry
-                List<String> newRecord = Arrays.asList(
-                        user.getStringId(),
-                        serializeItemList(rentList),
-                        serializeExpiryList(rentList));
-            } else {
-                // Update previous user entry
+    public void createEntry(User user, Item item) throws ControllerError {
+        user.getRentList().add(item); // Assuming this method ensures no duplicates
+        try {
+            List<List<String>> allRecords = CsvUtil.readCsv(path); // Read all records
+            boolean userFound = false;
+
+            // Iterate over all records to find and update the user's record
+            for (List<String> record : allRecords) {
+                if (record.get(0).equals(user.getStringId())) {
+                    userFound = true;
+                    // Update the record with the new serialized rent list
+                    record.set(1, serializeItemList(user.getRentList()));
+                    break;
+                }
             }
+
+            if (!userFound) {
+                // User not found, create a new record
+                allRecords.add(Arrays.asList(user.getStringId(), serializeItemList(user.getRentList())));
+            }
+
+            // Write the updated list of all records back to the CSV, replacing the old content
+            CsvUtil.writeCsv(allRecords, path, false);
         } catch (Exception e) {
-            throw new ControllerError("Error reading user", e);
+            throw new ControllerError("Error updating user rent list", e);
         }
     }
 
-    private String serializeExpiryList(ArrayList<Item> rentList) {
-
-    }
 
     private String serializeItemList(ArrayList<Item> rentList) {
+        if (rentList.isEmpty()) {
+            return "{}";
+        }
         return rentList.stream()
                 .map(item -> item.getStringID())
-                .collect(Collectors.joining(","));
+                .collect(Collectors.joining(",", "{", "}"));
     }
 
     //Reading Entry
@@ -73,7 +81,7 @@ public class RentListController {
             throw new ControllerError("Error reading user", e);
         }
 
-        user.setRentList(newRentList);
+//        user.setRentList(newRentList);
     }
 
     //Return Item

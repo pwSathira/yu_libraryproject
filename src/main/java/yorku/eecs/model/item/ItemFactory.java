@@ -27,6 +27,7 @@ public class ItemFactory {
         item.setPublisher(record.get(3));
         item.setPrice(Integer.parseInt(record.get(4)));
         item.setQuantity(Integer.parseInt(record.get(5)));
+        item.setExpiryDate(record.get(6));
         return item;
     }
     public static Item updateItem(Item item, List<String> record) {
@@ -35,20 +36,20 @@ public class ItemFactory {
         switch (itemType) {
             case "Book":
                 Book book = (Book) item;
-                record.set(6, book.getISBN());
+                record.set(7, book.getISBN());
                 break;
             case "CD_DVD":
                 CD_DVD cd_dvd = (CD_DVD) item;
-                record.set(6, cd_dvd.getUPC());
+                record.set(7, cd_dvd.getUPC());
                 break;
             case "Magazine":
                 Magazine magazine = (Magazine) item;
-                record.set(6, magazine.getISSN());
+                record.set(7, magazine.getISSN());
                 break;
             case "Textbook":
                 Textbook textbook = (Textbook) item;
-                record.set(6, textbook.getISBN());
-                record.set(7, textbook.getEdition());
+                record.set(7, textbook.getISBN());
+                record.set(8, textbook.getEdition());
                 break;
             default:
                 throw new IllegalArgumentException("Unknown item type: " + itemType);
@@ -63,6 +64,7 @@ public class ItemFactory {
         record.set(3, item.getPublisher());
         record.set(4, Integer.toString(item.getPrice()));
         record.set(5, Integer.toString(item.getQuantity()));
+        record.set(6, item.getExpiryDate());
     }
 
 

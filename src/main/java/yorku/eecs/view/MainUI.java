@@ -42,6 +42,11 @@ public class MainUI extends JFrame implements ViewSwitcher {
         cardPanel.add(bookUI, "Book");
         AuthUI authUI = new AuthUI(this);
         cardPanel.add(authUI, "Auth");
+
+    }
+    private void loginDependantUIs() {
+        HomeUI homeUI = new HomeUI(this);
+        cardPanel.add(homeUI, "Home");
     }
     @Override
     public void switchView(String viewName) {
@@ -50,6 +55,7 @@ public class MainUI extends JFrame implements ViewSwitcher {
     @Override
     public void setUser(User user) {
         cardController.setUser(user);
+        loginDependantUIs();
     }
 
     @Override

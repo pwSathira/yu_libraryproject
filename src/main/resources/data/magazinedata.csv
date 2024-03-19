@@ -1,3 +1,3 @@
-itemID,itemName,location,publisher,price,quantity,ISSN
+itemID,itemName,location,publisher,price,quantity,ExpiryDate,ISSN
 300000000,National Geographic,Magazine Rack,National Geographic Society,5,20,00279358
 300000001,The Economist,Magazine Rack,The Economist Newspaper Limited,10,20,00130613

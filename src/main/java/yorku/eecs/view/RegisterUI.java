@@ -112,7 +112,7 @@ public class RegisterUI extends AuthBaseUI {
                 if (!userExists && "Visitor".equals(role) && user instanceof Visitor) {
                     userController.createUser(user);
                     JOptionPane.showMessageDialog(null, "Registration successful!");
-                    viewSwitcher.switchView("Login");
+                    viewSwitcher.switchView("Home");
                 } else if (!userExists && !"Visitor".equals(role)) {
                     //Use user controller to add to admin queue
                     userController.addToAdminQueue(user);

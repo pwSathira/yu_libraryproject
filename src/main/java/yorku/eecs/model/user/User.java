@@ -3,7 +3,9 @@ import yorku.eecs.model.cart.RentCart;
 import yorku.eecs.model.item.Item;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class User {
     //SignUp class embedded into User class for simplicity
