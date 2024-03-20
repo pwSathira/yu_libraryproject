@@ -35,6 +35,9 @@ public class UserFactory {
             case "Visitor":
                 user = new Visitor();
                 break;
+            case "Admin":
+                user = new Admin();
+                break;
             default:
                 throw new IllegalArgumentException("Unknown user type: " + userType);
         }

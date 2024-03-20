@@ -3,13 +3,7 @@ package yorku.eecs.controller.item;
 import yorku.eecs.controller.ControllerError;
 import yorku.eecs.logic.CsvUtil;
 import yorku.eecs.model.item.Item;
-import yorku.eecs.model.item.ItemFactory;
 import yorku.eecs.model.user.User;
-import yorku.eecs.model.user.UserFactory;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -102,9 +96,6 @@ public class RentListController {
                     String itemType = itemController.determineItemType(Integer.toString(itemId));
                     Item item = itemController.readItem(Integer.toString(itemId), itemType);
                     user.getRentList().add(item);
-                }
-                for (Item item : user.getRentList()) {
-                    System.out.println("Item: " + item.getItemName());
                 }
             } else {
                 // Throw error that user does not exist

@@ -3,6 +3,7 @@ package yorku.eecs;
 import yorku.eecs.controller.ControllerError;
 import yorku.eecs.controller.item.ItemController;
 import yorku.eecs.controller.item.RentListController;
+import yorku.eecs.controller.user.UserController;
 import yorku.eecs.model.cart.PurchaseCart;
 import yorku.eecs.model.item.Book;
 import yorku.eecs.model.item.Magazine;
@@ -46,7 +47,9 @@ public class Main {
                 .quantity(20)
                 .itemID(300000000)
                 .build();
-        Visitor visitor = new Visitor("400000000", "password");
+        Visitor visitor = new Visitor("400000001", "password");
+//        UserController userController = new UserController();
+//        userController.createUser(visitor);
         RentListController rentListController = new RentListController();
         rentListController.createEntry(visitor, book);
         rentListController.createEntry(visitor, magazine);

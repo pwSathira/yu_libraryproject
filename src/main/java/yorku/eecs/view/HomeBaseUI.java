@@ -43,8 +43,6 @@ public abstract class HomeBaseUI extends JPanel {
         buttonIconPaths.put(newsletter, "src/main/resources/static/sidebarui/newsletter.png");
         courses = new JButton();
         buttonIconPaths.put(courses, "src/main/resources/static/sidebarui/courses.png");
-        homeTitle = new JButton();
-        buttonIconPaths.put(homeTitle, "src/main/resources/static/loginui/LoginUI_Logo.png");
 
         // Process buttons and icons
         for (Map.Entry<JButton, String> entry : buttonIconPaths.entrySet()) {
@@ -62,18 +60,16 @@ public abstract class HomeBaseUI extends JPanel {
         catalog.setActionCommand("Catalog");
         newsletter.setActionCommand("NewsLetter");
         courses.setActionCommand("Courses");
-        homeTitle.setActionCommand("Home");
     }
 
     private void setupSidebarLayout() {
-        sidebar.setLayout(new GridLayout(5, 1));
-        sidebar.add(homeTitle);
+        sidebar.setLayout(new GridLayout(4, 1));
         sidebar.add(home);
         sidebar.add(catalog);
         sidebar.add(newsletter);
         sidebar.add(courses);
         sidebar.setBackground(new Color(0xD3D3D3));
-        sidebar.setPreferredSize(new Dimension(200, getHeight()));
+        sidebar.setPreferredSize(new Dimension(150, getHeight()));
     }
     protected void buttonIconFunctions(ImageIcon icon, JButton button) {
         button.setBorder(null);
