@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class HomeBaseUI extends JPanel {
     protected JButton home;
@@ -16,8 +18,8 @@ public abstract class HomeBaseUI extends JPanel {
     protected JButton homeTitle;
 
     protected ViewSwitcher viewSwitcher;
-    private JPanel sidebar; // Panel for sidebar buttons
-    protected JPanel contentPanel; // Panel for displaying the main content
+    private JPanel sidebar;
+    protected JPanel contentPanel;
 
     public HomeBaseUI(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
@@ -32,32 +34,30 @@ public abstract class HomeBaseUI extends JPanel {
     }
 
     private void initButtons() {
+        Map<JButton, String> buttonIconPaths = new HashMap<>();
         home = new JButton();
+        buttonIconPaths.put(home, "src/main/resources/static/sidebarui/home.png");
         catalog = new JButton();
+        buttonIconPaths.put(catalog, "src/main/resources/static/sidebarui/catalog.png");
         newsletter = new JButton();
+        buttonIconPaths.put(newsletter, "src/main/resources/static/sidebarui/newsletter.png");
         courses = new JButton();
+        buttonIconPaths.put(courses, "src/main/resources/static/sidebarui/courses.png");
         homeTitle = new JButton();
-        ImageIcon homeIcon = new ImageIcon("src/main/resources/static/sidebarui/home.png");
-        ImageIcon catalogIcon = new ImageIcon("src/main/resources/static/sidebarui/catalog.png");
-        ImageIcon newsletterIcon = new ImageIcon("src/main/resources/static/sidebarui/newsletter.png");
-        ImageIcon coursesIcon = new ImageIcon("src/main/resources/static/sidebarui/courses.png");
-        ImageIcon homeTitleIcon = new ImageIcon("src/main/resources/static/loginui/LoginUI_Logo.png");
-        homeIcon = ImageProcessor.resizeIcon(homeIcon, 50, 50);
-        catalogIcon = ImageProcessor.resizeIcon(catalogIcon, 50, 50);
-        newsletterIcon = ImageProcessor.resizeIcon(newsletterIcon, 50, 50);
-        coursesIcon = ImageProcessor.resizeIcon(coursesIcon, 50, 50);
-        homeTitleIcon = ImageProcessor.resizeIcon(homeTitleIcon, 150, 50);
-        home.setIcon(homeIcon);
-        catalog.setIcon(catalogIcon);
-        newsletter.setIcon(newsletterIcon);
-        courses.setIcon(coursesIcon);
-        homeTitle.setIcon(homeTitleIcon);
-        buttonIconFunctions(homeIcon, home);
-        buttonIconFunctions(catalogIcon, catalog);
-        buttonIconFunctions(newsletterIcon, newsletter);
-        buttonIconFunctions(coursesIcon, courses);
-        buttonIconFunctions(homeTitleIcon, homeTitle);
-        // Setup commands, similar to your original implementation
+        buttonIconPaths.put(homeTitle, "src/main/resources/static/loginui/LoginUI_Logo.png");
+
+        // Process buttons and icons
+        for (Map.Entry<JButton, String> entry : buttonIconPaths.entrySet()) {
+            JButton button = entry.getKey();
+            ImageIcon icon = new ImageIcon(entry.getValue());
+            int width = button == homeTitle ? 150 : 50;
+            int height = 50;
+            ImageIcon resizedIcon = ImageProcessor.resizeIcon(icon, width, height);
+            button.setIcon(resizedIcon);
+            buttonIconFunctions(resizedIcon, button);
+        }
+
+        // Set up commands
         home.setActionCommand("Home");
         catalog.setActionCommand("Catalog");
         newsletter.setActionCommand("NewsLetter");

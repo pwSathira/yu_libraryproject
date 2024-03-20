@@ -12,20 +12,11 @@ public class HomeUI extends HomeBaseUI {
 
     public HomeUI(ViewSwitcher viewSwitcher) {
         super(viewSwitcher);
-
-        JFXPanel jfxPanel = new JFXPanel();
-        initFX(jfxPanel);
-
-        contentPanel.setLayout(new BorderLayout());
-        contentPanel.add(jfxPanel, BorderLayout.CENTER);
+        setupContentPanel();
     }
 
-    private void initFX(JFXPanel jfxPanel) {
-        Platform.runLater(() -> {
-            WebView webView = new WebView();
-            webView.getEngine().load("http://www.wikipedia.com");
-            Scene scene = new Scene(webView);
-            jfxPanel.setScene(scene);
-        });
+    private void setupContentPanel() {
+        
     }
+
 }

@@ -100,4 +100,17 @@ public class ItemController {
             System.out.println(record);
         }
     }
+
+    public String determineItemType(String id) {
+        if(id.startsWith("1")){
+            return "Book";
+        }else if(id.startsWith("2")){
+            return "CD_DVD";
+        }else if(id.startsWith("3")){
+            return "Magazine";
+        }else if(id.startsWith("4")){
+            return "Textbook";
+        }
+        return null;
+    }
 }

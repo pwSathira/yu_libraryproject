@@ -3,6 +3,7 @@ package yorku.eecs.controller.item;
 import yorku.eecs.controller.ControllerError;
 import yorku.eecs.logic.CsvUtil;
 import yorku.eecs.model.item.Item;
+import yorku.eecs.model.item.ItemFactory;
 import yorku.eecs.model.user.User;
 import yorku.eecs.model.user.UserFactory;
 
@@ -25,41 +26,32 @@ public class RentListController {
 
     //Creating Entry
     public void createEntry(User user, Item item) throws ControllerError {
-        user.getRentList().add(item); // Assuming this method ensures no duplicates
-        try {
-            List<List<String>> allRecords = CsvUtil.readCsv(path); // Read all records
-            boolean userFound = false;
-
-            // Iterate over all records to find and update the user's record
-            for (List<String> record : allRecords) {
-                if (record.get(0).equals(user.getStringId())) {
-                    userFound = true;
-                    // Update the record with the new serialized rent list
-                    record.set(1, serializeItemList(user.getRentList()));
-                    break;
-                }
+        //Check if user exists
+        user.getRentList().add(item);
+        try{
+            String id = user.getStringId();
+            List<String> records = CsvUtil.getRecordByColumn(path, id, 0);
+            if (records != null) {
+                //Update entry
+                List<String> modifiableRecords = new ArrayList<>();
+                modifiableRecords.add(0, user.getStringId());
+                modifiableRecords.add(1, serializeItemList(user.getRentList()));
+                CsvUtil.writeCsv(Arrays.asList(modifiableRecords), path, false);
+            } else {
+                //Create new entry
+                List<List<String>> newRecord = new ArrayList<>();
+                newRecord.add(Arrays.asList(id, serializeItemList(user.getRentList())));
+                CsvUtil.writeCsv(newRecord, path, true);
             }
-
-            if (!userFound) {
-                // User not found, create a new record
-                allRecords.add(Arrays.asList(user.getStringId(), serializeItemList(user.getRentList())));
-            }
-
-            // Write the updated list of all records back to the CSV, replacing the old content
-            CsvUtil.writeCsv(allRecords, path, false);
-        } catch (Exception e) {
-            throw new ControllerError("Error updating user rent list", e);
+        }catch (Exception e){
+            throw new ControllerError("Error reading user", e);
         }
     }
 
-
     private String serializeItemList(ArrayList<Item> rentList) {
-        if (rentList.isEmpty()) {
-            return "{}";
-        }
         return rentList.stream()
                 .map(item -> item.getStringID())
-                .collect(Collectors.joining(",", "{", "}"));
+                .collect(Collectors.joining(","));
     }
 
     //Reading Entry
@@ -68,67 +60,58 @@ public class RentListController {
         * RentList CSV -> { returnItem, other Items}
         * return User
          */
-        List<String> newRentList = new ArrayList<>();
-        String id;
-        try {
-            List<String> record = CsvUtil.getRecordByColumn(path, user.getStringId(), 0);
-            if (record == null) {
-                //Create new entry
+        List<Item> rentList = user.getRentList();
+        rentList.remove(returnItem);
+        try{
+            String id = user.getStringId();
+            List<String> records = CsvUtil.getRecordByColumn(path, id, 0);
+            if (records != null) {
+                //Update entry
+                List<String> modifiableRecords = new ArrayList<>();
+                modifiableRecords.add(0, user.getStringId());
+                modifiableRecords.add(1, serializeItemList(user.getRentList()));
+                CsvUtil.writeCsv(Arrays.asList(modifiableRecords), path, false);
             } else {
-                newRentList = record;
+                //Throw error that user does not exist
+                throw new ControllerError("User does not exist");
             }
-        } catch (Exception e) {
+        }catch (Exception e){
             throw new ControllerError("Error reading user", e);
         }
-
-//        user.setRentList(newRentList);
     }
 
     //Return Item
-    public void returnItem(User user, Item item) throws ControllerError {
-        List<String> rentList = new ArrayList<>();
-        String id;
+    public void checkEntry(User user) throws ControllerError {
         try {
-            List<String> record = CsvUtil.getRecordByColumn(path, user.getStringId(), 0);
-            rentList = record;
-//            if (record == null) {
-//                //Create new entry
-//            } else {
-//                rentList = record;
-//            }
+            String id = user.getStringId();
+            List<String> records = CsvUtil.getRecordByColumn(path, id, 0);
+            System.out.println("Records: " + records);
+            if (records != null && !records.isEmpty()) {
+                // Skip the first element and parse the remaining strings into a list of integers
+                ArrayList<Integer> itemIds = new ArrayList<>();
+                for (int i = 1; i < records.size(); i++) { // Start from 1 to skip the ID
+                    try {
+                        itemIds.add(Integer.parseInt(records.get(i)));
+                    } catch (NumberFormatException e) {
+                        System.err.println("Error parsing record to integer: " + records.get(i));
+                    }
+                }
+                user.getRentList().clear();
+                for (int itemId : itemIds) {
+                    ItemController itemController = new ItemController();
+                    String itemType = itemController.determineItemType(Integer.toString(itemId));
+                    Item item = itemController.readItem(Integer.toString(itemId), itemType);
+                    user.getRentList().add(item);
+                }
+                for (Item item : user.getRentList()) {
+                    System.out.println("Item: " + item.getItemName());
+                }
+            } else {
+                // Throw error that user does not exist
+                throw new ControllerError("User does not exist");
+            }
         } catch (Exception e) {
             throw new ControllerError("Error reading user", e);
-        }
-
-        String itemTitle = Integer.toString(item.getItemID());
-
-    }
-
-
-    // Search if the user is in the CSV, add them if they are not
-    public void searchUser(User user) {
-        String id = user.getStringId();
-        boolean userExists = false;
-
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                // Split the line into columns
-                String[] columns = line.split(",");
-
-                // Check if the column at columnIndexToCheck matches the specified string
-                if (columns.length > 0 && columns[0].equals(id)) {
-                    // If matched, break the loop
-                    userExists = true;
-                    break;
-                }
-
-                // Process the current row
-                // You can do something with the columns here
-                //System.out.println("Row: " + line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

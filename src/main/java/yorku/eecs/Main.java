@@ -34,7 +34,7 @@ public class Main {
                 .publisher("PUBLISHER")
                 .quantity(20)
                 .expiryDate("DATE")
-                .itemID(10000)
+                .itemID(100000000)
                 .build();
 
         Magazine magazine = new Magazine.Builder()
@@ -44,17 +44,13 @@ public class Main {
                 .location("Test")
                 .publisher("Test")
                 .quantity(20)
-                .itemID(10002)
+                .itemID(300000000)
                 .build();
-        Visitor visitor = new Visitor("100000000", "password");
-        visitor.getRentList().add(magazine);
+        Visitor visitor = new Visitor("400000000", "password");
         RentListController rentListController = new RentListController();
-        System.out.println("Visitor: " + visitor.getId() + " " + visitor.getPassword());
         rentListController.createEntry(visitor, book);
-
-
-
-
+        rentListController.createEntry(visitor, magazine);
+        rentListController.checkEntry(visitor);
 
     }
 
