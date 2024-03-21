@@ -16,7 +16,7 @@ import yorku.eecs.model.item.CD_DVD;
 public class Main {
     public static void main(String[] args) throws ControllerError {
         System.out.println("YorkU booting...");
-        MainUI main = new MainUI();
+        MainUI main = MainUI.getSingleton();
         CD_DVD cdDvd = new CD_DVD.Builder()
                 .UPC("Test")
                 .itemName("Test")

@@ -20,17 +20,16 @@ import javafx.scene.Scene;
 import javafx.scene.web.WebView;
 import yorku.eecs.model.user.User;
 
-public class NewsletterUI extends HomeBaseUI implements Subject {
+public class NewsletterUI extends HomeBaseUI {
 
     protected JButton NYTimes;
     protected JButton guardian;
     protected JButton bloomberg;
 
     protected ViewSwitcher viewSwitcher;
-    private JPanel sidebar;
     private JFXPanel jfxPanel;
+    private String path = "src/main/resources/data/newsletterdata.csv";
 
-    private ArrayList<Observer> observerList = new ArrayList<>();
 
     public NewsletterUI(ViewSwitcher viewSwitcher) {
         super(viewSwitcher);
@@ -64,30 +63,16 @@ public class NewsletterUI extends HomeBaseUI implements Subject {
             WebView webView = new WebView();
             if (website.equals("NYTimes")) {
                 webView.getEngine().load("https://www.nytimes.com/");
-                NYTimes.setText("Go to Website");
             }
             else if (website.equals("Guardian")) {
                 webView.getEngine().load("https://www.theguardian.com/international");
-                guardian.setText("Go to Website");
             }
             else if (website.equals("Bloomberg")) {
                 webView.getEngine().load("https://www.bloomberg.com/canada");
-                bloomberg.setText("Go to Website");
             }
             Scene scene = new Scene(webView);
             jfxPanel.setScene(scene);
         });
-    }
-
-    public void addObserver(User user){
-
-    }
-
-    public void removeObserver(User user) {
-
-    }
-    public void notifyObservers() {
-
     }
 
 }

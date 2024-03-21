@@ -12,7 +12,9 @@ public class MainUI extends JFrame implements ViewSwitcher {
     private final ViewSwitcher viewSwitcher = this;
     private final JPanel cardPanel;
 
-    public MainUI() {
+    private static MainUI singleton;
+
+    private MainUI() {
         // Setup JFrame
         setTitle("YorkU Library System");
         setSize(1080, 720);
@@ -30,6 +32,14 @@ public class MainUI extends JFrame implements ViewSwitcher {
         // Add cardPanel and buttonPanel to the frame
         add(cardPanel, BorderLayout.CENTER);
         setVisible(true);
+    }
+
+    public static MainUI getSingleton() {
+        if (singleton == null) {
+
+            singleton = new MainUI();
+        }
+        return singleton;
     }
     private void initializeUI() {
         BootUI bootUI = new BootUI(this);
