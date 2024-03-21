@@ -1,17 +1,29 @@
 package yorku.eecs.view;
 
-import javax.swing.*;
+import yorku.eecs.controller.card.ViewSwitcher;
+import yorku.eecs.controller.item.ItemController;
 
-public class RequestNewBookUI extends JPanel {
+import javax.swing.*;
+import java.awt.*;
+
+public class RequestNewBookUI extends HomeBaseUI {
 
     private JTextField searchField = new JTextField(100);
-    private JButton searchButton = new Jbutton("Search here");
+    private JButton searchButton = new JButton("Search here");
+    private JPanel displayedItems = new JPanel(new GridLayout(3,3));
+
+    private ItemController itemController;
+
+    public RequestNewBookUI(ViewSwitcher viewSwitcher) {
+        super(viewSwitcher);
+        itemController = new ItemController();
 
 
+        JPanel searchPannel = new JPanel();
+        searchPannel.add(searchField);
+        searchPannel.add(searchButton);
 
 
-
-
-
-
+        //searchButton.add()
+    }
 }

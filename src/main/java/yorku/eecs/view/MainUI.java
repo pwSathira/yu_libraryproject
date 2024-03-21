@@ -12,7 +12,7 @@ public class MainUI extends JFrame implements ViewSwitcher {
     private final ViewSwitcher viewSwitcher = this;
     private final JPanel cardPanel;
 
-    private static MainUI singleton;
+    private static MainUI mainUI;
 
     private MainUI() {
         // Setup JFrame
@@ -35,12 +35,14 @@ public class MainUI extends JFrame implements ViewSwitcher {
     }
 
     public static MainUI getSingleton() {
-        if (singleton == null) {
+        if (mainUI == null) {
 
-            singleton = new MainUI();
+            mainUI = new MainUI();
         }
-        return singleton;
+        return mainUI;
     }
+
+
     private void initializeUI() {
         BootUI bootUI = new BootUI(this);
         cardPanel.add(bootUI, "Boot");
@@ -52,6 +54,8 @@ public class MainUI extends JFrame implements ViewSwitcher {
         cardPanel.add(bookUI, "Book");
         AuthUI authUI = new AuthUI(this);
         cardPanel.add(authUI, "Auth");
+        PaymentUI paymentUI = new PaymentUI(this);
+        cardPanel.add(paymentUI, "Payment");
     }
     private void loginDependantUIs() {
         HomeUI homeUI = new HomeUI(this);

@@ -1,15 +1,27 @@
 package yorku.eecs.model.payment;
 
+import javax.swing.*;
+
 public class PaymentByDebit implements PaymentMethod {
 
-    public PaymentByDebit() {
+    private JPanel contentPanel;
 
+    public PaymentByDebit(JPanel contentPanel) {
+        this.contentPanel = contentPanel;
     }
 
     private Debit debitCard;
 
-    public void pay(int total) {} ;
+    public void pay(int total) {}
 
-    public void getPaymentDetails() {};
+    @Override
+    public void requestPaymentDetails() {
+
+    }
+
+    @Override
+    public boolean verifyPaymentDetails() {
+        return true;
+    }
 
 }

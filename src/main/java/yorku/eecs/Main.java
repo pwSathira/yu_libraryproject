@@ -6,15 +6,21 @@ import yorku.eecs.controller.item.RentListController;
 import yorku.eecs.controller.user.UserController;
 import yorku.eecs.model.cart.PurchaseCart;
 import yorku.eecs.model.item.Book;
+import yorku.eecs.model.item.Item;
 import yorku.eecs.model.item.Magazine;
 import yorku.eecs.model.user.Student;
 import yorku.eecs.model.user.Visitor;
 import yorku.eecs.view.MainUI;
 import yorku.eecs.model.item.CD_DVD;
 
+import java.sql.Array;
+import java.util.ArrayList;
+
 
 public class Main {
     public static void main(String[] args) throws ControllerError {
+
+
         System.out.println("YorkU booting...");
         MainUI main = MainUI.getSingleton();
         CD_DVD cdDvd = new CD_DVD.Builder()

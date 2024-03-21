@@ -1,13 +1,19 @@
 package yorku.eecs.controller.item;
 
 import yorku.eecs.controller.ControllerError;
+import yorku.eecs.logic.CSVError;
 import yorku.eecs.logic.CsvUtil;
 import yorku.eecs.logic.FilePath;
 import yorku.eecs.model.item.Item;
 import yorku.eecs.model.item.ItemFactory;
-import yorku.eecs.logic.CSVError;
 
+
+import java.util.ArrayList;
 import java.util.List;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+
 /*
  * CRUD Operations for Item Model
  */
@@ -113,4 +119,71 @@ public class ItemController {
         }
         return null;
     }
+
+    public List<String> recommendItem(String input){
+        List<String> recommendations = new ArrayList<>();
+
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/data/bookdata.csv"));
+            String line;
+            List<String> inputTokens = tokenize(input.toLowerCase());
+            while((line = reader.readLine()) != null){
+                String[] parts = line.split(",");
+                String bookName = parts[1].toLowerCase();
+                List<String> bookTokens = tokenize(bookName);
+                double similarity = cosineSimilarity(inputTokens , bookTokens);
+                if (similarity > 0.5){
+                    recommendations.add(bookName);
+//                    System.out.println(bookName);
+                }
+            }
+
+            reader.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return recommendations;
+    }
+
+    public static List<String> tokenize(String text){
+        List<String> tokens = new ArrayList<>();
+        for(String token : text.split("\\s")){
+            tokens.add(token);
+        }
+        return tokens;
+    }
+
+    public static double cosineSimilarity(List<String> list1, List<String> list2){
+        int product = 0;
+        for(String token : list1){
+            if(list2.contains(token)){
+                product++;
+            }
+        }
+        double magnitude1 = Math.sqrt(list1.size());
+        double magnitude2 = Math.sqrt(list2.size());
+        return product / (magnitude1 * magnitude2);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

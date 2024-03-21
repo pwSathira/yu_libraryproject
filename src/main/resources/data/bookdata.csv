@@ -2,3 +2,6 @@ itemID,itemName,location,publisher,price,quantity,expiryDate,ISBN
 100000000,Moby-Dick,Library,Harper & Brothers,15,20,3/20/2024,9780142437247
 100000001,To Kill a Mockingbird,Library,Incompetent Co,8,20,9780061120084
 100000002,NAME,LOCATION,PUBLISHER,1,20,DATE,ISBN
+100000003,spider man,Library,Incompetent Co,8,20,9780061120084
+100000004,spider man 1,Library,Incompetent Co,8,20,9780061120084
+100000005,spider man 2,Library,Incompetent Co,8,20,9780061120084

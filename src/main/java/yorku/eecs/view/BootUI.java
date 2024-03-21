@@ -56,7 +56,7 @@ public class BootUI extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (i == 100){
-                    Timer switchTimer = new Timer(1000, v -> viewSwitcher.switchView("Auth"));
+                    Timer switchTimer = new Timer(1000, v -> viewSwitcher.switchView("Payment"));
                     switchTimer.setRepeats(false); // Ensure the timer only fires once
                     switchTimer.start();
                 }

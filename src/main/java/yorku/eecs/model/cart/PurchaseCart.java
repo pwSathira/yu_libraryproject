@@ -35,7 +35,6 @@ public class PurchaseCart implements Cart{
     }
     @Override
     public void checkout() {
-        paymentMethod.getPaymentDetails();
         paymentMethod.pay(this.getTotal());
         items.clear();
     }
