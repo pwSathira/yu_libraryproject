@@ -18,7 +18,7 @@ public class NewsletterController {
 
     private final String path = "src/main/resources/data/newsletterdata.csv";
 
-    public void subscribe(User user, String newsletter) throws ControllerError {
+    public void subscribe(User user, String newsletter) {
         String id = user.getStringId();
         int column = 0;
         try {
@@ -58,11 +58,11 @@ public class NewsletterController {
             }
             writer.close();
         }catch (Exception e){
-            throw new ControllerError("Error subscribing to newsletter", e);
+
         }
     }
 
-    public void unsubscribe(User user, String newsletter) throws ControllerError {
+    public void unsubscribe(User user, String newsletter) {
         String id = user.getStringId();
         try{
             BufferedReader reader = new BufferedReader(new FileReader(path));
@@ -98,11 +98,12 @@ public class NewsletterController {
             writer.close();
             reader.close();
         }catch (Exception e){
-            throw new ControllerError("Error unsubscribing from newsletter", e);
+
         }
     }
 
-    public List<String> getSubscriptions(User user) throws ControllerError {
+    public List<String> getSubscriptions(User user) {
+    //public List<String> getSubscriptions(String id) {
         String id = user.getStringId();
         List<String> subscriptions = new ArrayList<>();
         try{
@@ -122,7 +123,7 @@ public class NewsletterController {
             }
             reader.close();
         }catch (Exception e) {
-            throw new ControllerError("Error getting subscriptions", e);
+
         }
         return subscriptions;
     }
