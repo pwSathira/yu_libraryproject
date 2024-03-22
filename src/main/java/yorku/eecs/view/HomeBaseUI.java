@@ -44,6 +44,8 @@ public abstract class HomeBaseUI extends JPanel {
         courses = new JButton();
         buttonIconPaths.put(courses, "src/main/resources/static/sidebarui/courses.png");
 
+        newsletter.addActionListener(e -> actionPerformed(e.getActionCommand()));
+
         // Process buttons and icons
         for (Map.Entry<JButton, String> entry : buttonIconPaths.entrySet()) {
             JButton button = entry.getKey();
@@ -60,6 +62,12 @@ public abstract class HomeBaseUI extends JPanel {
         catalog.setActionCommand("Catalog");
         newsletter.setActionCommand("NewsLetter");
         courses.setActionCommand("Courses");
+    }
+
+    private void actionPerformed(String action) {
+        if (action.equals("NewsLetter")) {
+            viewSwitcher.switchView("Newsletter");
+        }
     }
 
     private void setupSidebarLayout() {
