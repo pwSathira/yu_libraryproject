@@ -45,6 +45,7 @@ public abstract class HomeBaseUI extends JPanel {
         buttonIconPaths.put(courses, "src/main/resources/static/sidebarui/courses.png");
 
         newsletter.addActionListener(e -> actionPerformed(e.getActionCommand()));
+        home.addActionListener(e -> viewSwitcher.switchView("Home"));
 
         // Process buttons and icons
         for (Map.Entry<JButton, String> entry : buttonIconPaths.entrySet()) {

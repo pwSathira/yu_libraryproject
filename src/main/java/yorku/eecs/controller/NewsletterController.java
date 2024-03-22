@@ -3,6 +3,8 @@ package yorku.eecs.controller;
 import yorku.eecs.logic.CsvUtil;
 import yorku.eecs.model.item.Item;
 import yorku.eecs.model.user.User;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,113 +21,70 @@ public class NewsletterController {
     private final String path = "src/main/resources/data/newsletterdata.csv";
 
     public void subscribe(User user, String newsletter) {
-        String id = user.getStringId();
-        int column = 0;
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(path));
-            String firstLine = reader.readLine(); // Only read the first row for the newsletters
-            String[] newsletters = firstLine.split(",");
-            for (int i = 0; i < newsletters.length; i++) {
-                if (newsletters[i].equals(newsletter)) {
-                    column = i;
-                    break;
-                }
+        try{
+            user.getSubscribedList().add(newsletter);
+            String id = user.getStringId();
+            List<String> records = CsvUtil.getRecordByColumn(path, id, 0);
+            if (records != null) {
+                //Update entry
+                List<String> modifiableRecords = new ArrayList<>();
+                modifiableRecords.add(0, user.getStringId());
+                modifiableRecords.add(1, serializeNewsletterList(user.getSubscribedList()));
+                CsvUtil.removeRecordByColumn(path, id, 0);
+                CsvUtil.writeCsv(Arrays.asList(modifiableRecords), path, true);
+            } else {
+                //Create new entry
+                List<List<String>> newRecord = new ArrayList<>();
+                newRecord.add(Arrays.asList(id, serializeNewsletterList(user.getSubscribedList())));
+                CsvUtil.writeCsv(newRecord, path, true);
             }
-
-            List<String[]> rows = new ArrayList<>();
-            String line;
-            String[] row;
-            while ((line = reader.readLine()) != null) {
-                row = line.split(",");
-                rows.add(row);
-            }
-            reader.close();
-            for (int i = 1; i < rows.size(); i++) { // Start from 1 to skip header row
-                row = rows.get(i);
-                row[column] += "," + id; // Append the id
-            }
-
-            PrintWriter writer = new PrintWriter(new FileWriter(path));
-            for (String[] newRow : rows) {
-                StringBuilder rowString = new StringBuilder();
-                for (int i = 0; i < newRow.length; i++) {
-                    if (i > 0) {
-                        rowString.append(",");
-                    }
-                    rowString.append(newRow[i]);
-                }
-                writer.println(rowString.toString());
-            }
-            writer.close();
-        }catch (Exception e){
-
+        }catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    private String serializeNewsletterList(ArrayList<String> subscribedList) {
+        return String.join(",", subscribedList);
     }
 
     public void unsubscribe(User user, String newsletter) {
-        String id = user.getStringId();
+        getSubscribeList(user);
+        List<String> subscribeList = user.getSubscribedList();
+        subscribeList.remove(newsletter);
         try{
-            BufferedReader reader = new BufferedReader(new FileReader(path));
-            int column = 0;
-            String firstLine = reader.readLine(); // Only read the first row for the newsletters
-            String[] newsletters = firstLine.split(",");
-            for (int i = 0; i < newsletters.length; i++) {
-                if (newsletters[i].equals(newsletter)) {
-                    column = i;
-                    break;
-                }
+            String id = user.getStringId();
+            List<String> records = CsvUtil.getRecordByColumn(path, id, 0);
+            if (records != null) {
+                //Update entry
+                List<String> modifiableRecords = new ArrayList<>();
+                modifiableRecords.add(0, user.getStringId());
+                modifiableRecords.add(1, serializeNewsletterList(user.getSubscribedList()));
+                CsvUtil.removeRecordByColumn(path, id, 0);
+                CsvUtil.writeCsv(Arrays.asList(modifiableRecords), path, true);
+            } else {
+                //Throw error that user does not exist
+                System.out.println("User does not exist");
             }
-
-            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] columns = line.split(",");
-                if (columns[column].equals(id)) {
-                    columns[column] = "";
-                }
-                StringBuilder newLine = new StringBuilder();
-                for (int i = 0; i < columns.length; i++) {
-                    if (i > 0) {
-                        newLine.append(",");
-                    }
-                    newLine.append(columns[i]);
-                }
-
-                // Write the modified line to the original file
-                writer.write(newLine.toString());
-                writer.newLine();
-            }
-            writer.close();
-            reader.close();
         }catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 
-    public List<String> getSubscriptions(User user) {
-    //public List<String> getSubscriptions(String id) {
-        String id = user.getStringId();
-        List<String> subscriptions = new ArrayList<>();
-        try{
-            BufferedReader reader = new BufferedReader(new FileReader(path));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] columns = line.split(",");
-                if (columns[0].equals(id)) {
-                    subscriptions.add("NYTimes");
-                }
-                if (columns[1].equals(id)) {
-                    subscriptions.add("Guardian");
-                }
-                if (columns[2].equals(id)) {
-                    subscriptions.add("Bloomberg");
-                }
+    //Get subscribe list
+    public User getSubscribeList(User user) {
+        try {
+            String id = user.getStringId();
+            List<String> records = CsvUtil.getRecordByColumn(path, id, 0);
+            if (records != null) {
+                ArrayList<String> subscribedList = new ArrayList<>(Arrays.asList(records.get(1).split(",")));
+                user.setSubscribedList(subscribedList);
+            } else {
+                user.setSubscribedList(new ArrayList<>());
             }
-            reader.close();
-        }catch (Exception e) {
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return subscriptions;
+        return user;
     }
 
 }

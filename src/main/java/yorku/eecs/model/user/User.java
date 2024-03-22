@@ -20,7 +20,7 @@ public abstract class User {
     private ArrayList<Item> rentList = new ArrayList<>();
 
     //currently subscribed items
-    private ArrayList<Item> subscribedList = new ArrayList<>();
+    private ArrayList<String> subscribedList = new ArrayList<>();
 
     public User() {
     }
@@ -50,7 +50,7 @@ public abstract class User {
         return id;
     }
     public String getStringId() {return Integer.toString(id);}
-    public ArrayList<Item> getSubscribedList() {return subscribedList;}
+    public ArrayList<String> getSubscribedList() {return subscribedList;}
     public ArrayList<Item> getRentList() {return rentList;}
 
     //SETTERS
@@ -60,7 +60,7 @@ public abstract class User {
     public void setPassword(String password) {this.password = password;}
     public void setId(int id) {this.id = id;}
     public void setEmailAddress(String emailAddress) {this.emailAddress = emailAddress;}
-    public void setSubscribedList(ArrayList<Item> subscribedList) {this.subscribedList = subscribedList;}
+    public void setSubscribedList(ArrayList<String> subscribedList) {this.subscribedList = subscribedList;}
     public void setRentList(ArrayList<Item> rentList) {this.rentList = rentList;}
 
     public List<List<String>> toCSV(int id) {

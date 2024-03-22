@@ -49,7 +49,8 @@ public class NewsletterUI extends HomeBaseUI {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
         NewsletterController newsletterController = new NewsletterController();
-        List<String> subscriptions = newsletterController.getSubscriptions(user);
+        user = newsletterController.getSubscribeList(user);
+        List<String> subscriptions = user.getSubscribedList();
         //List<String> subscriptions = newsletterController.getSubscriptions("100000000");
 
         NYTimes = new JButton("Subscribe to NYTimes");

@@ -48,4 +48,15 @@ public class CsvUtil {
         }
         return null;
     }
+    //Remove specified record from CSV file
+    public static void removeRecordByColumn(String filePath, String searchValue, int columnIndex) throws CSVError {
+        List<List<String>> records = readCsv(filePath);
+        for (int i = 0; i < records.size(); i++) {
+            if (records.get(i).size() > columnIndex && records.get(i).get(columnIndex).equals(searchValue)) {
+                records.remove(i);
+                break;
+            }
+        }
+        writeCsv(records, filePath, false);
+    }
 }
