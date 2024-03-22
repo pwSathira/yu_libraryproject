@@ -8,6 +8,7 @@ import yorku.eecs.model.item.Item;
 import yorku.eecs.model.user.User;
 import yorku.eecs.model.user.UserFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 /*
 * CRUD Operations for User Model
@@ -165,5 +166,39 @@ public class UserController {
         } catch (CSVError e) {
             e.printStackTrace();
         }
+    }
+
+    public void removeFromAdminQueue(User user) {
+        try {
+            List<List<String>> records = CsvUtil.readCsv(FilePath.ADMINQUEUEDATA.getPath());
+            records.removeIf(record -> record.get(0).equals(user.getStringId()));
+            CsvUtil.writeCsv(records, FilePath.ADMINQUEUEDATA.getPath(), false);
+        } catch (CSVError e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void approveUser(User user, String userType) {
+        try {
+            setPathBasedOnUserType(userType);
+            CsvUtil.writeCsv(user.toCSV(user.getId()), path, true);
+            removeFromAdminQueue(user);
+        } catch (CSVError | ControllerError e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<User> getAdminQueue() {
+        ArrayList<User> users = new ArrayList<>();
+        try {
+            List<List<String>> records = CsvUtil.readCsv(FilePath.ADMINQUEUEDATA.getPath());
+            for (List<String> record : records) {
+                String userType = determineUserType(record.get(0));
+                users.add(UserFactory.createUser(userType, record));
+            }
+        } catch (CSVError e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 }

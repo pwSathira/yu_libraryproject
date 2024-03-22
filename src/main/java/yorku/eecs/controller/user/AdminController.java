@@ -62,5 +62,4 @@ public class AdminController{
         return userController.authenticateUser(userDB, userInput);
     }
 
-
 }

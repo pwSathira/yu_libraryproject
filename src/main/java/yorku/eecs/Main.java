@@ -53,13 +53,13 @@ public class Main {
                 .quantity(20)
                 .itemID(300000000)
                 .build();
-        Visitor visitor = new Visitor("400000001", "password");
-//        UserController userController = new UserController();
-//        userController.createUser(visitor);
-        RentListController rentListController = new RentListController();
-        rentListController.createEntry(visitor, book);
-        rentListController.createEntry(visitor, magazine);
-        rentListController.checkEntry(visitor);
+//        Visitor visitor = new Visitor("400000001", "password");
+////        UserController userController = new UserController();
+////        userController.createUser(visitor);
+//        RentListController rentListController = new RentListController();
+//        rentListController.createEntry(visitor, book);
+//        rentListController.createEntry(visitor, magazine);
+//        rentListController.checkEntry(visitor);
 
 
 

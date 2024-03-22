@@ -48,9 +48,10 @@ public class LoginUI extends AuthBaseUI {
         AdminController adminController = new AdminController();
         try {
             if (id.equals("999999999") && password.equals("admin")) {
-                user = UserFactory.createUser("admin", id, password);
+                user = UserFactory.createUser("Admin", "999999999", "admin");
                 viewSwitcher.setUser(user);
                 viewSwitcher.switchView("AdminHome");
+                return true;
             }
             String userType = adminController.determineUserType(id);
             user = adminController.readUser(id, userType);

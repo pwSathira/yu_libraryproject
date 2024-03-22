@@ -6,6 +6,7 @@ import yorku.eecs.model.user.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class MainUI extends JFrame implements ViewSwitcher {
     private final CardController cardController;
@@ -66,8 +67,13 @@ public class MainUI extends JFrame implements ViewSwitcher {
     private void loginDependantUIs() {
         HomeUI homeUI = new HomeUI(this);
         cardPanel.add(homeUI, "Home");
+    }
+    private void adminDependantUIs() {
         AdminHomeUI adminHomeUI = new AdminHomeUI(this);
         cardPanel.add(adminHomeUI, "AdminHome");
+        UserRequestsUI userRequestsUI = new UserRequestsUI(this);
+        cardPanel.add(userRequestsUI, "UserRequests");
+
     }
     @Override
     public void switchView(String viewName) {
@@ -76,13 +82,15 @@ public class MainUI extends JFrame implements ViewSwitcher {
     @Override
     public void setUser(User user) {
         cardController.setUser(user);
-        loginDependantUIs();
+        if (user.getId()!=999999999){
+            loginDependantUIs();
+        } else {
+            adminDependantUIs();
+        }
     }
 
     @Override
     public User getUser() {
         return cardController.getUser();
     }
-
-
 }

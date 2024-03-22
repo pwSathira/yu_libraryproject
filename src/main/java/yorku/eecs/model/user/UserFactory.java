@@ -17,6 +17,8 @@ public class UserFactory {
         User user = determineUser(userType);
         user.setId(Integer.parseInt(id));
         user.setPassword(password);
+        System.out.println("User created: " + user.getStringId());
+        System.out.println(user.getPassword());
         return user;
     }
 
