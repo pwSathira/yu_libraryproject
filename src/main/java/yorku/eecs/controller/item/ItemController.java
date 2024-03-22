@@ -122,27 +122,32 @@ public class ItemController {
 
     public ArrayList<String> recommendItem(String input){
         ArrayList<String> recommendations = new ArrayList<>();
-
-        try{
-            BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/data/bookdata.csv"));
-            String line;
-            List<String> inputTokens = tokenize(input.toLowerCase());
-            while((line = reader.readLine()) != null){
-                String[] parts = line.split(",");
-                String bookName = parts[1].toLowerCase();
-                List<String> bookTokens = tokenize(bookName);
-                double similarity = cosineSimilarity(inputTokens , bookTokens);
-                if (similarity > 0.5){
-                    recommendations.add(bookName);
-//                    System.out.println(bookName);
+        ArrayList<String> paths = new ArrayList<>();
+        paths.add(FilePath.BOOKDATA.getPath());
+        paths.add(FilePath.CD_DVDDATA.getPath());
+        paths.add(FilePath.MAGAZINEDATA.getPath());
+        paths.add(FilePath.TEXTBOOKDATA.getPath());
+        for(String path : paths){
+            try{
+                BufferedReader reader = new BufferedReader(new FileReader(path));
+                String line;
+                List<String> inputTokens = tokenize(input.toLowerCase());
+                while((line = reader.readLine()) != null){
+                    String[] parts = line.split(",");
+                    String bookName = parts[1].toLowerCase();
+                    List<String> bookTokens = tokenize(bookName);
+                    double similarity = cosineSimilarity(inputTokens , bookTokens);
+                    if (similarity > 0.5){
+                        recommendations.add(bookName);
+                    }
                 }
+                reader.close();
             }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
 
-            reader.close();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
 
         return recommendations;
     }

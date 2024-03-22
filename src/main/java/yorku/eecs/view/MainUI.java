@@ -57,11 +57,10 @@ public class MainUI extends JFrame implements ViewSwitcher {
         cardPanel.add(authUI, "Auth");
         PaymentUI paymentUI = new PaymentUI(this);
         cardPanel.add(paymentUI, "Payment");
-        RequestNewBookUI requestUI = new RequestNewBookUI(this);
-        cardPanel.add(requestUI, "Request");
+        SearchUI searchUI = new SearchUI(this);
+        cardPanel.add(searchUI, "Search");
         TextbookUI textbookUI = new TextbookUI(this);
         cardPanel.add(textbookUI, "textbook");
-
     }
     private void loginDependantUIs() {
         HomeUI homeUI = new HomeUI(this);

@@ -16,6 +16,7 @@ public abstract class HomeBaseUI extends JPanel {
     protected JButton newsletter;
     protected JButton courses;
     protected JButton homeTitle;
+    protected JButton search;
 
     protected ViewSwitcher viewSwitcher;
     private JPanel sidebar;
@@ -43,9 +44,12 @@ public abstract class HomeBaseUI extends JPanel {
         buttonIconPaths.put(newsletter, "src/main/resources/static/sidebarui/newsletter.png");
         courses = new JButton();
         buttonIconPaths.put(courses, "src/main/resources/static/sidebarui/courses.png");
+        search = new JButton();
+        buttonIconPaths.put(search, "src/main/resources/static/sidebarui/search.png");
 
         newsletter.addActionListener(e -> actionPerformed(e.getActionCommand()));
-        home.addActionListener(e -> viewSwitcher.switchView("Home"));
+        home.addActionListener(e -> actionPerformed(e.getActionCommand()));
+        search.addActionListener(e -> actionPerformed(e.getActionCommand()));
 
         // Process buttons and icons
         for (Map.Entry<JButton, String> entry : buttonIconPaths.entrySet()) {
@@ -63,20 +67,30 @@ public abstract class HomeBaseUI extends JPanel {
         catalog.setActionCommand("Catalog");
         newsletter.setActionCommand("NewsLetter");
         courses.setActionCommand("Courses");
+        search.setActionCommand("Search");
     }
 
     private void actionPerformed(String action) {
-        if (action.equals("NewsLetter")) {
-            viewSwitcher.switchView("Newsletter");
+        switch (action) {
+            case "NewsLetter":
+                viewSwitcher.switchView("Newsletter");
+                break;
+            case "Search":
+                viewSwitcher.switchView("Search");
+                break;
+            case "Home":
+                viewSwitcher.switchView("Home");
+                break;
         }
     }
 
     private void setupSidebarLayout() {
-        sidebar.setLayout(new GridLayout(4, 1));
+        sidebar.setLayout(new GridLayout(5, 1));
         sidebar.add(home);
         sidebar.add(catalog);
         sidebar.add(newsletter);
         sidebar.add(courses);
+        sidebar.add(search);
         sidebar.setBackground(new Color(0xD3D3D3));
         sidebar.setPreferredSize(new Dimension(150, getHeight()));
     }
