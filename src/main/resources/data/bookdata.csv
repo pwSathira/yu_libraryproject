@@ -4,4 +4,4 @@ itemID,itemName,location,publisher,price,quantity,expiryDate,ISBN
 100000002,NAME,LOCATION,PUBLISHER,1,20,DATE,ISBN
 100000003,spider man,Library,Incompetent Co,8,20,9780061120084
 100000004,spider man 1,Library,Incompetent Co,8,20,9780061120084
-100000005,spider man 2,Library,Incompetent Co,8,20,9780061120084
+100000005,spider man 2,Library,Incompetent Co,8,20,9780061120084100000006,NAME,LOCATION,PUBLISHER,1,20,DATE,ISBN

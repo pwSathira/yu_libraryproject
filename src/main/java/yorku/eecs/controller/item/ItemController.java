@@ -120,8 +120,8 @@ public class ItemController {
         return null;
     }
 
-    public List<String> recommendItem(String input){
-        List<String> recommendations = new ArrayList<>();
+    public ArrayList<String> recommendItem(String input){
+        ArrayList<String> recommendations = new ArrayList<>();
 
         try{
             BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/data/bookdata.csv"));

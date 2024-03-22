@@ -61,6 +61,10 @@ public class Main {
         rentListController.createEntry(visitor, magazine);
         rentListController.checkEntry(visitor);
 
+
+
+
+
     }
 
 
