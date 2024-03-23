@@ -4,7 +4,6 @@ import yorku.eecs.controller.ControllerError;
 import yorku.eecs.controller.item.ItemController;
 import yorku.eecs.controller.item.RentListController;
 import yorku.eecs.controller.user.UserController;
-import yorku.eecs.model.cart.PurchaseCart;
 import yorku.eecs.model.item.Book;
 import yorku.eecs.model.item.Item;
 import yorku.eecs.model.item.Magazine;
