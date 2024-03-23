@@ -1,7 +1,7 @@
-package yorku.eecs.model.payment;
-
-public class Purchase {
-
-
-
-}
+//package yorku.eecs.model.payment;
+//
+//public class Purchase {
+//
+//
+//
+//}

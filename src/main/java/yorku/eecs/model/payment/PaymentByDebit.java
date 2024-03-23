@@ -10,7 +10,6 @@ public class PaymentByDebit implements PaymentMethod {
         this.contentPanel = contentPanel;
     }
 
-    private Debit debitCard;
 
     public void pay(int total) {}
 

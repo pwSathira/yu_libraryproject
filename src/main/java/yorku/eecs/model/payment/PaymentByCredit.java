@@ -18,7 +18,7 @@ public class PaymentByCredit implements PaymentMethod {
     public PaymentByCredit(JPanel contentPanel) {
         this.contentPanel = contentPanel;
     }
-    private Credit creditCard;
+
 
     public void pay(int total) {
     }
