@@ -59,7 +59,8 @@ public class UserRequestsUI extends BaseAdminUI {
         int selectedRow = userTable.getSelectedRow();
         if (selectedRow >= 0) {
             User user = userModel.getUserAt(selectedRow);
-            userController.approveUser(user, "dumb");
+            String userType = userController.determineUserType(user.getStringId());
+            userController.approveUser(user, userType);
             JOptionPane.showMessageDialog(this, "Approved: " + user.toString());
         }
     }

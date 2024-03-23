@@ -1,4 +1,4 @@
-package yorku.eecs.controller;
+package yorku.eecs.controller.item;
 
 import yorku.eecs.logic.CsvUtil;
 import yorku.eecs.model.item.Item;

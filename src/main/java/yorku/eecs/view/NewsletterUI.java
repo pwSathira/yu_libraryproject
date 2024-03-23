@@ -1,21 +1,11 @@
 package yorku.eecs.view;
 
-import net.miginfocom.swing.MigLayout;
-import yorku.eecs.controller.ControllerError;
-import yorku.eecs.controller.NewsletterController;
+import yorku.eecs.controller.item.NewsletterController;
 import yorku.eecs.controller.card.ViewSwitcher;
-import yorku.eecs.controller.user.UserController;
-import yorku.eecs.logic.BackgroundPanel;
-import yorku.eecs.logic.IdField;
-import yorku.eecs.logic.ImageProcessor;
+
 import java.util.List;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;

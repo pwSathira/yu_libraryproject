@@ -1,12 +1,12 @@
-package yorku.eecs.view;
-
-public class Observer {
-
-    public Observer() {
-
-    }
-
-    public void update() {
-
-    }
-}
+//package yorku.eecs.view;
+//
+//public class Observer {
+//
+//    public Observer() {
+//
+//    }
+//
+//    public void update() {
+//
+//    }
+//}

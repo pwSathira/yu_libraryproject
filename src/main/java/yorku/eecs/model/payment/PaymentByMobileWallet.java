@@ -11,11 +11,9 @@ public class PaymentByMobileWallet implements PaymentMethod {
         this.contentPanel = contentPanel;
     }
     public void pay(int total) {
-
     };
 
     public void requestPaymentDetails() {
-
     }
 
     @Override
