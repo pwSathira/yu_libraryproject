@@ -101,7 +101,7 @@ public class NewsletterUI extends HomeBaseUI {
             else if (website.equals("Bloomberg")) {
                 bloomberg.setText("Visit Bloomberg");
                 unsubBloomberg.setVisible(true);
-                webView.getEngine().load("https://www.bloomberg.com/canada");
+                webView.getEngine().load("https://en.wikipedia.org/wiki/Bloomberg_L.P");
             }
             newsletterController.subscribe(user, website);
             //newsletterController.subscribe("100000000", website);
@@ -122,7 +122,7 @@ public class NewsletterUI extends HomeBaseUI {
             guardian.setText("Subscribe to Guardian");
         }
         else if (newsletter.equals("Bloomberg")) {
-            unsubNYTimes.setVisible(false);
+            unsubBloomberg.setVisible(false);
             bloomberg.setText("Subscribe to Bloomberg");
         }
         else {
