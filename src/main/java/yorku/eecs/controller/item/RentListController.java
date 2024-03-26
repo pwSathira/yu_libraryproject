@@ -1,24 +1,21 @@
 package yorku.eecs.controller.item;
 
 import yorku.eecs.controller.ControllerError;
+import yorku.eecs.logic.CSVError;
 import yorku.eecs.logic.CsvUtil;
 import yorku.eecs.model.item.Item;
 import yorku.eecs.model.user.User;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Calendar;
+import java.time.format.DateTimeFormatter;
 
 public class RentListController {
-    /*
-    Format:
-    First column: User ID
-    Second column: List of items the user has checked out
-    Uses rentlist.csv for data
-     */
     private String path = "src/main/resources/data/rentlist.csv";
     /*
     Current plan for CSV:
@@ -27,24 +24,60 @@ public class RentListController {
     Column 3: List of expiration dates, mapped to the users by index
      */
 
-    public boolean checkItemExists(Item item) {
-        return true;
+    public void checkItemExists(Item item) {
+        String itemID = item.getStringID();
+        try {
+            List<String> records = CsvUtil.getRecordByColumn(path, itemID, 0);
+            if (records == null) {
+                // Append new item ID at the end of the CSV
+                FileWriter csvWriter = new FileWriter(path);
+                csvWriter.append(itemID);
+                csvWriter.close();
+            }
+        } catch(IOException e) {
+            System.out.println("Error checking item exists in rentlist");
+        }
     }
 
     public boolean checkAvailability(Item item) {
         // Loop through users and count how many copies are checked out
-        return true;
+        String itemID = item.getStringID();
+        boolean available = false;
+        try {
+            List<String> records = CsvUtil.getRecordByColumn(path, itemID, 0);
+            if (records.size() > 21) { // Not sure if the first column (item ID) is included in list
+                available = false;
+            }
+            else {
+                available = true;
+            }
+        } catch(CSVError e) {
+            System.out.println("Error checking availability of item");
+        }
+        return available;
     }
 
-    public void rentItem() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        cal.add(Calendar.DAY_OF_MONTH, 7);
-        int year = cal.get(Calendar.YEAR);
-        int month = (cal.get(Calendar.MONTH))+1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
+    public void rentItem(User user, Item item) {
+        String itemID = item.getStringID();
+        String userID = user.getStringId();
+        LocalDate currentDate = LocalDate.now();
+        LocalDate nextMonthDate = currentDate.plusMonths(1);
+        // Format date in terms of "month-day-year"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+        String nextMonthString = nextMonthDate.format(formatter);
+
+        boolean canRent = checkAvailability(item);
+        if (canRent == true) {
+
+        }
     }
 
+    /*
+    Format:
+    First column: User ID
+    Second column: List of items the user has checked out
+    Uses rentlist.csv for data
+     */
     //Creating Entry
 //    public void createEntry(User user, Item item) throws ControllerError {
 //        //Check if user exists
