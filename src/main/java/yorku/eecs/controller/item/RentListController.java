@@ -28,7 +28,7 @@ public class RentListController {
         String itemID = item.getStringID();
         try {
             List<String> records = CsvUtil.getRecordByColumn(path, itemID, 0);
-            if (records == null) {
+            if (records == null || records.size() == 0) {
                 // Append new item ID at the end of the CSV
                 FileWriter csvWriter = new FileWriter(path);
                 csvWriter.append(itemID);
