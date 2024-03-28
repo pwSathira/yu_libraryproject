@@ -65,10 +65,53 @@ public class RentListController {
         // Format date in terms of "month-day-year"
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
         String nextMonthString = nextMonthDate.format(formatter);
-
+        checkItemExists(item);
         boolean canRent = checkAvailability(item);
         if (canRent == true) {
+            try{
+                List<String> newRecord = CsvUtil.getRecordByColumn(path, itemID, 0);
+                String newEntry = userID + "~" + nextMonthString;
+                newRecord.add(newEntry);
+                CsvUtil.removeRecordByColumn(path, itemID, 0);
+                CsvUtil.writeCsv(Arrays.asList(newRecord), path, true);
+            } catch(CSVError e) {
+                System.out.println("Error renting item: " + itemID + " for user: " + userID);
+            }
+        }
+    }
 
+    public void returnItem(User user, Item item) {
+        String itemID = item.getStringID();
+        String userID = user.getStringId();
+        LocalDate currentDate = LocalDate.now();
+        LocalDate nextMonthDate = currentDate.plusMonths(1);
+        // Format date in terms of "month-day-year"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+        String nextMonthString = nextMonthDate.format(formatter);
+        checkItemExists(item);
+        try {
+            List<String> record = CsvUtil.getRecordByColumn(path, itemID, 0);
+            List<String> usersCheckedOut = new ArrayList<>();
+            boolean userHasItem = false;
+            int indexToBeDeleted = -1;
+            for (int i = 0; i < record.size(); i++) {
+                String current[] = record.get(i).split("~");
+                if (current[0].equals(userID)) {
+                    userHasItem = true;
+                    indexToBeDeleted = i;
+                    break;
+                }
+            }
+            if (userHasItem == true) {
+                record.remove(indexToBeDeleted);
+                CsvUtil.removeRecordByColumn(path, itemID, 0);
+                CsvUtil.writeCsv(Arrays.asList(record), path, true);
+            }
+            else {
+                System.out.println("User: " + userID + " does not have item: " + itemID + " checked out");
+            }
+        } catch(CSVError e) {
+            System.out.println("Error returning item: " + itemID + " for user: " + userID);
         }
     }
 
